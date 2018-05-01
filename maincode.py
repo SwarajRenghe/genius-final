@@ -82,7 +82,7 @@ def loginVerification():
 			# print "yeeeeeeeeeeeeeeet"
 			userData = returnUserData(entered_username)
 			# print (userData.isArtist == str(userData.isArtist))
-			if str(userData.isArtist) == "checkArtist":
+			if str(userData.isArtist) == "1":
 				# print "is artist"
 				songList = returnArtistSongData(userData.id)
 				return render_template ('artistProfile.html', userData=userData, songList=songList)
@@ -266,7 +266,10 @@ def newAnnotationHandling():
 
 		annotateText = Annotations(theAnnotation, current_user.id, songNumber, startline, endline)
 		addAnnotationToDatabase (annotateText)
-		return "added annotation successfully"
+		# return redirect(url_for(song(int(songNumber))))
+		# return render_template
+		return song(int(songNumber))
+		# return "added annotation successfully"
 
 
 @app.route('/newUserHandlingPage', methods=['GET', 'POST'])
