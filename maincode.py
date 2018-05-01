@@ -1,5 +1,4 @@
 from flask import Flask, request, render_template, redirect, url_for, Response, json
-from songs import returnSongs
 from flask_login import current_user, LoginManager, UserMixin, login_user, logout_user, login_required
 from sqlalchemy import exc
 from passlib.hash import sha256_crypt

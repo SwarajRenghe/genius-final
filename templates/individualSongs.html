@@ -2,9 +2,11 @@
 
 {% block head %}
   <link rel=stylesheet type=text/css href="{{ url_for('static', filename='individualSongs.css') }}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"
+integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 {% endblock %}
-  {{ songNumber }}
 {% block title %}
+  {{ songNumber }}
 
 {% endblock %}
 
@@ -23,7 +25,7 @@
       for (i = 0; i < annotationDataForThisSong.length; i++) {
         if (lineNumber >= annotationDataForThisSong[i][2] && lineNumber <= annotationDataForThisSong[i][3]) {
           document.getElementById('lyrics').style.transition = "all 1s";
-          document.getElementById('lyrics').style.marginLeft = "0%";
+          document.getElementById('lyrics').style.marginLeft = "5%";
           // document.getElementById('aform').style.
           // document.getElementById('allOfMakeAnnotation').style.marginRight = "-20%";
           document.getElementById('allOfMakeAnnotation').style.opacity = "0"
@@ -83,6 +85,7 @@
         document.getElementById('lyrics').style.marginLeft = "-5%";
         document.getElementById('actualAnnotations').style.marginLeft = "0%"
         document.getElementById('actualAnnotations').style.transition = "all 1s";
+        document.getElementById('allOfMakeAnnotation').style.transition = "all 1s";
         // document.getElementById('showAnnotationButton').style.marginLeft = "-20%"
         document.getElementById('annotation1').style.transition = "all 1s";
         // document.getElementById('showAnnotationButton').style.transition = "all 1s";
@@ -192,6 +195,23 @@
 
     var s = document.getElementById('lyrics').innerHTML;
     console.log(s.nl2br());
+      function returnSongNumber()
+        {
+          var songComment = document.getElementById('commentSongC').value;
+          var songNumberC={{songNumber}};
+          let datas={sumber:songNumberC, somment:songComment};
+          let request=$.ajax({url:'http://localhost:5000/newCommentPage',method:'PUT',data:JSON.stringify(datas),contentType: 'application/json'});
+          console.log(datas['sumber']);
+          console.log(datas['somment']);
+          request.done(function(data){
+            console.log(data['message']);
+
+            var t1="<div class='row'><div class='col-sm-2' >"+data['upic']+"</div><div class='col-sm-2'>"+data['uname']+"</div><div class='col-sm-6' style='text-align: center; font-size:20px;font-weight:200; padding-bottom:5px;padding-top: 5px'>"+songComment+"</div><div class='col-sm-2'></div></div>";
+            $("#emptydiv").before(t1);
+          });
+
+
+        }
 </script>
 
 <br><br>
@@ -256,18 +276,17 @@
           </button> <br><br><br>
           <div class="annotation" id="annotation1" style="opacity: 0">
           <input type="button" value="Get selection" onmousedown="getSelText()">
-            <form action='http://localhost:5000/songs/{{ songNumber }}' name="aform" id="aform">
+            <form action='http://localhost:5000/songs/{{ songNumber }}' name="aform" id="aform" style="position: relative; z-index: -1;">
               <textarea id="buttonForSongNumber" name="buttonForSongNumber" style="visibility: hidden"></textarea>
               <textarea name="selectedtext" id="selectedtext" name="selectedtext" rows="12" cols="40" style="font-size: 2vh;"></textarea>
-              <textarea name="annotationItself" id="annotationText" name="annotationText" placeholder="W
-              rite Your Views.." rows="6" cols="40" style="font-size: 2vh;"> </textarea>
+              <textarea name="annotationItself" id="annotationText" name="annotationText" placeholder="Write Your Views.." rows="6" cols="40" style="font-size: 2vh;"> </textarea>
               <input type="submit" value="Submit" onmousedown="sendDataBack()">
             </form>
           </div>
         </div>  
 
 
-<div class="container row" style="position: relative; margin-bottom: 3vh">
+<div class="container row">
       <div class="add-comments" id="add-comments">
         <h4 style="font-size:26px;font-weight:200;border-bottom:1px solid #979797; padding-bottom:5px; margin-top:50px; margin-left: 10px;">
          Add Comment
@@ -312,13 +331,6 @@
     <div id="emptydiv"></div>
 
 
-    {# {% if count == 0 %}
-    <h4 style="text-align: center; font-size:20px;font-weight:200; padding-bottom:5px;padding-top: 5px"> 
-     Nothing to show here 
-   </h4>
-   {% endif %} #}
-</div>
- </div>
 
 
 {% endblock %}
