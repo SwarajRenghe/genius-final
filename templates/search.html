@@ -1,0 +1,64 @@
+{% extends 'basicHTML.html' %}
+
+{% block title %}
+	Search
+{% endblock %}
+
+{% block titleBarElement %}
+    {% if is_authenticated %} 
+    	<li class="nav-item" style="text-align: center">
+        	<a class="nav-link js-scroll-trigger" href="/profile" style="padding-left: 45vh;padding-right: 6vh; font-size: 17px"> Profile </a>
+    	</li>
+    {% else %}
+    	<li class="nav-item" style="text-align: center">
+        	<a class="nav-link js-scroll-trigger" href="/" style="padding-left: 45vh;padding-right: 6vh; font-size: 17px"> Home Page </a>
+    	</li>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+<br><br>
+<div class="titleBar">
+	<p style="font-size: 9vh;"> Search Results </p>
+</div>
+
+<p class="smallTitle"> Songs </p>
+{% for i in data[0] %}
+	<p class="elements"> <a class="linkBack" href="/songs/{{ i[1] }}"> {{ loop.index }}. {{ i[0] }} </a> </p>
+{% endfor %}
+
+<p class="smallTitle"> Annotations </p>
+{% for i in data[1] %}
+	<p class="elements"> <a class="linkBack" href="/songs/{{ i[1] }}"> {{ loop.index }}. {{ i[0] }} </a> </p>
+{% endfor %}
+
+<style>
+.titleBar {
+  width: 100%;
+  padding: 4vh;
+  /*margin-top: 2vh;*/
+  /* top: auto; */
+  background-color: powderblue;
+  text-align: center;
+  font-family: 'Work Sans', sans-serif;
+}
+.smallTitle {
+  /*padding: 4vh;	*/
+  margin-left: 3vh;
+  font-size: 6vh;
+  font-family: 'Work Sans', sans-serif;
+}
+.elements {
+	margin-left: 6vh;
+	font-size: 3vh;
+  	font-family: 'Work Sans', sans-serif;
+}
+.linkBack {
+	text-decoration: none;
+}
+.linkBack:hover {
+	color: blue;
+}
+</style>
+
+{% endblock %}

@@ -12,8 +12,13 @@ Profile
 
 {% block titleBarElement %} 
     <li class="nav-item" style="text-align: center">
-        <a class="nav-link js-scroll-trigger" href="/logout" style="padding-left: 45vh; padding-right: 6vh color: white; font-size: 17px"> Logout </a>
+        <a class="nav-link js-scroll-trigger" href="/logout" style="padding-right: 6vh color: white; font-size: 17px"> Logout </a>
     </li>
+    <form style="margin-left: 10vh;" action="/searchQuery" name="searchQuery" method="GET">
+        <div class="form-group">
+            <input type="text" name="searchQuery" placeholder="search.."  style="width: 100%; font-size: 2vh; padding: 1vh; margin: 0; margin-top: 1vh; border: none;">
+        </div>
+    </form>
 {% endblock %}
 
 {% block body %}
@@ -54,28 +59,17 @@ Profile
                 <table class="table table-striped">
                     <thead>
                       <tr>
-                        <th>POSTS</th>
+                        <th> MY ANNOTATIONS </th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>post1</td>
-                      </tr>
-                      <tr>
-                        <td>post2</td>
-                      </tr>
-                      <tr>
-                        <td>post3</td>
-                      </tr>
-                       <tr>
-                        <td>post4</td>
-                      </tr>
-                      <tr>
-                        <td>post5</td>
-                      </tr>
-                      <tr>
-                        <td>post6</td>
-                      </tr>
+                      {% for i in annotationDataForThisUser %}
+                        <tr>
+                          <td> <a href="/songs/{{ i[0] }}" style="text-decoration: none; color: black"> {{ loop.index }} </a> </td>
+                          <td> <a href="/songs/{{ i[0] }}" style="text-decoration: none; color: black"> {{ i[1] }} </a> </td>
+                          <td> <a href="/songs/{{ i[0] }}" style="text-decoration: none; color: black"> {{ i[2] }} </a> </td>
+                        </tr>
+                      {% endfor %}
                     </tbody>
                 </table>
         </div>

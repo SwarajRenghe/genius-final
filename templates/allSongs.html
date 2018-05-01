@@ -8,8 +8,23 @@
   Songs
 {% endblock %}
 
-{% block body %}
+{% block titleBarElement %} 
+    {% if is_authenticated %}
+        <li class="nav-item" style="text-align: center">
+            <a class="nav-link js-scroll-trigger" href="/profile" style="padding-left: 4vh;padding-right: 6vh;color: white; font-size: 17px"> Profile Page </a>
+        </li>
+        <li class="nav-item" style="text-align: center">
+            <a class="nav-link js-scroll-trigger" href="/logout" style="padding-right: 6vh;color: white; font-size: 17px"> Logout </a>
+        </li>
+    {% else %}
+        <li class="nav-item" style="text-align: center">
+            <a class="nav-link js-scroll-trigger" href="/" style="padding-left: 45vh;padding-right:6vh;color: white;font-size: 17px"> Go to HomePage </a>
+        </li>
+    {% endif %}
+{% endblock %}
 
+{% block body %}
+<br><br>
 
 <div class="titleBar">
   <!-- <div class="Genius"> <p> Genius </p> </div> -->

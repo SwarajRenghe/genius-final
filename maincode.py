@@ -23,7 +23,10 @@ def load_user(id):
 
 @app.route('/')
 def homePage():
-	return render_template ('homePage.html')
+	if not current_user.is_authenticated:
+		return render_template ('homePage.html')
+	else:
+		return redirect(url_for("profilePage"))
 
 @app.route('/addSong')
 def addSong():
@@ -59,18 +62,20 @@ def logout():
 @login_required
 def profilePage():
 	userData = returnUserData(current_user.username)
+	annotationDataForThisUser = returnAnnotationDataForThisUser(current_user.id)
+	print "annotationDataForThisUser = "
+	print annotationDataForThisUser
 	if str(userData.isArtist) == "checkArtist":
 		# print "is artist"
 		songList = returnArtistSongData(userData.id)
-		return render_template ('artistProfile.html', userData=userData, songList=songList)
+		return render_template ('artistProfile.html', userData=userData, songList=songList, annotationDataForThisUser=annotationDataForThisUser)
 	else:
 		# print "is not artist"
-		return render_template ('userProfile.html', userData=userData)
+		return render_template ('userProfile.html', userData=userData, annotationDataForThisUser=annotationDataForThisUser)
 
 @app.route('/loginVerification', methods=['GET', 'POST'])
 def loginVerification():
 	if request.method == 'POST':
-
 		entered_username = request.form['username']
 		entered_password = request.form['password']
 		entered_data = [entered_username, entered_password];
@@ -85,10 +90,12 @@ def loginVerification():
 			if str(userData.isArtist) == "checkArtist":
 				# print "is artist"
 				songList = returnArtistSongData(userData.id)
-				return render_template ('artistProfile.html', userData=userData, songList=songList)
+				return redirect(url_for("profilePage"))
+				# return render_template ('artistProfile.html', userData=userData, songList=songList)
 			else:
 				# print "is not artist"
-				return render_template ('userProfile.html', userData=userData)
+				return redirect(url_for("profilePage"))
+				# return render_template ('userProfile.html', userData=userData)
 		else:
 			return "false"
 
@@ -268,6 +275,11 @@ def newAnnotationHandling():
 		addAnnotationToDatabase (annotateText)
 		return "added annotation successfully"
 
+@app.route('/searchQuery', methods=['GET'])
+def searchQuery():
+	searchQuery = request.args.get('searchQuery')
+	data = searchForThisText(searchQuery)
+	return render_template('search.html', data=data)
 
 @app.route('/newUserHandlingPage', methods=['GET', 'POST'])
 def newUserHandling():

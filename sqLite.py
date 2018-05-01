@@ -79,6 +79,7 @@ def addAnnotationToDatabase(annotation):
     session.commit()
     session.close()
 
+
 def allAnnotationLineNumbers(songNumber):
     session = Session()
     annotations = session.query(Annotations).all()
@@ -216,6 +217,19 @@ class Song (Base):
         self.imglink = imglink
 
 
+def returnAnnotationDataForThisUser(thisUserID):
+    session = Session()
+    annotationDataForThisUser = []
+    query1 = session.query(Annotations).filter_by(id=thisUserID).all()
+    for i in query1:
+        temp = []
+        query2 = session.query(Song).filter_by(songnumber=i.song_id).first()
+        temp.append(i.song_id)
+        temp.append(query2.songname)
+        temp.append(i.ann_desc)
+        annotationDataForThisUser.append(temp)
+    return annotationDataForThisUser
+
 def addSongToDatabase (song):
     session = Session()
     Base.metadata.create_all(engine)
@@ -306,6 +320,20 @@ def printSongList ():
     songs = session.query(Song).all()
     for i in songs:
         print (str(i.songnumber) + ". " + i.songname + " - " + i.artist)
+
+def searchForThisText(searchQuery):
+    query1 = session.query(Song).all()
+    query2 = session.query(Annotations).all()
+    allUserNames = []
+    allAnnotationDescriptions = []
+    finalList = []
+    for i in query1:
+        if searchQuery.lower() in i.songname.lower():
+            allUserNames.append([i.songname, i.songnumber])
+    for i in query2:
+        if searchQuery.lower() in i.ann_desc.lower():
+            allAnnotationDescriptions.append([i.ann_desc, i.song_id])
+    return [allUserNames, allAnnotationDescriptions]
 
 
 class userClass:
