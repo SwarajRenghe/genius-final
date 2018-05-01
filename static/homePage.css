@@ -1,0 +1,275 @@
+body, html {
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+    scroll: smooth;
+    behavior: 'smooth';
+}
+
+.bg1 {
+    /* The image used */
+    background-image: url("./Music-Wallpapers-For-Desktop-7.jpg");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bg2 {
+    /* The image used */
+    position: absolute;
+    top: 100%;
+    background-image: url("https://wallpapercave.com/wp/lwfQm84.jpg");
+
+    /* Full height */
+    height: 100%;
+    width: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.title {
+  /* position: absolute; */
+  /* top: 12px; */
+  /* padding-bottom: 12px; */
+  /* padding-top: 0; */
+  /* width: 35%; */
+  /* background-color: black; */
+  /* background-blend-mode: 500 soft-light; */
+  font-family: 'Playfair Display', serif;
+  /* margin: auto; */
+  /* text-align: center; */
+  /* color: red; */
+  font-size: 6vh;
+   padding-bottom: 0;
+  /* padding: 2vh; */
+}
+
+.genius {
+  /* text-align: left; */
+  /* margin: auto; */
+  /* left: 2vh; */
+  color: white;
+  /* text-align: center; */
+  /* border: solid white 1vh; */
+  font-family: 'Work Sans', sans-serif;
+  font-size: 6vh;
+  padding-bottom: 0;
+}
+.genius:hover {
+  color: black;
+}
+
+
+.Genius {
+  position: absolute;
+  text-align: center;
+  top: 10%;
+  left: 35%;
+  /* margin: auto; */
+  width: 30%;
+  font-family: 'Work Sans', sans-serif;
+  /* border: solid black 9vh; */
+  color: black;
+  /* padding-top: 1vh; */
+  font-size: 20vh;
+}
+/* .Genius:hover {
+  background-color: black;
+  color: white;
+} */
+
+.loginFormDiv {
+  /* border: solid black 1vh; */
+  position: absolute;
+  text-align: center;
+  top: 45%;
+  left: 40%;
+  margin: auto;
+  width: 20%;
+  font-family: 'Work Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  /* border: solid black 1vh; */
+  color: black;
+  padding-top: 1vh;
+  /* font-size: 8vh; */
+}
+
+.loginButton {
+  margin-top: 2vh;
+  /* padding-top: 2vh; */
+  color: black;
+  outline: none;
+  color: white;
+  /* background-color: black; */
+  /* border: solid white 0.5vh; */
+  cursor: pointer;
+  width: 60%;
+  font-size: 3.5vh;
+  font-family: 'Heebo', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Work Sans', sans-serif; */
+  padding: 1vh;
+  background-color:transparent
+  /* opacity: 0.9; */
+}
+.loginButton:hover {
+  color: black;
+  background-color: white;
+}
+
+.registerButton {
+  margin-top: 2vh;
+  /* padding-top: 2vh; */
+  color: black;
+  outline: none;
+  color: white;
+  /* background-color: black; */
+  /* border: solid white 0.5vh; */
+  cursor: pointer;
+  width: 100%;
+  font-size: 3.5vh;
+  font-family: 'Heebo', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Work Sans', sans-serif; */
+  padding: 1vh;
+  background-color:transparent
+  /* opacity: 0.9; */
+}
+.registerButton:hover {
+  color: black;
+  background-color: white;
+}
+
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+}
+
+
+.testText {
+  position: absolute;
+  top: 135%;
+  left: 30%;
+  color: black;
+  width: 45%;
+  -webkit-text-stroke: 0.2vh white;
+  padding: 4vh;
+  border: white solid 1vh;
+  font-size: 20vh;
+}
+
+
+.row{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.container{
+    .row{
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+}
+
+.search {
+  text-align: center;
+  /* font-size: 1.5vh; */
+  font-family: 'Work Sans', sans-serif;
+  text-align: center;
+  padding-bottom: 2vh;
+  /* margin-top: 4vh; */
+  font-size: 2.5vh;
+  /* right: 8vh; */
+  bottom: 1vh;
+  background-color: black;
+}
+/* .title:hover {
+  background-color: red;
+  color: white;
+} */
+
+.list-headings {
+  text-align: center;
+  font-size: 4vh;
+  padding: 1vh;
+}
+
+.allSongsLink {
+  width: 35%;
+  padding-top: 4vh;
+  margin: auto;
+  text-align: center;
+  font-size: 6vh;
+}
+
+.topTenHeadings {
+  background-color: black;
+  border: 1vh solid white;
+  width: 50%;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: overline;
+  color: hotpink;
+}
+
+.addSong {
+  width: 35%;
+  padding-top: 4vh;
+  margin: auto;
+  text-align: center;
+  font-size: 6vh;
+  color: purple;
+}
+.addUser {
+  width: 35%;
+  padding-top: 4vh;
+  margin: auto;
+  text-align: center;
+  font-size: 6vh;
+  color: purple;
+}
+
+.userList {
+  width: 35%;
+  padding-top: 4vh;
+  margin: auto;
+  text-align: center;
+  font-size: 6vh;
+  color: purple;
+}
+
+.login {
+  width: 35%;
+  padding-top: 4vh;
+  margin: auto;
+  text-align: center;
+  font-size: 6vh;
+  color: purple;
+  padding-bottom: 4vh;
+}
+
+/* .blackBar {
+  position: absolute;
+  top: 1px;
+  height: 180px;
+  background-color: black;
+} */

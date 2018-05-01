@@ -1,0 +1,17 @@
+{% extends 'basicHTML.html' %}
+
+{% block title %}
+  Empty Song Database
+{% endblock %}
+
+{% block head %}
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='songDatabaseEmpty.css') }}">
+{% endblock %}
+
+{% block body %}
+<div style="margin: auto; text-align: center;">
+  <h1 style="padding-top: 3vh;"> Oops. Song DataBase is empty. </h1>
+  <br><br><br>
+  <h3> <a href="/"> Go Back Home </a> </h3>
+</div>
+{% endblock %}

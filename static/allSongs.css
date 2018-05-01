@@ -1,0 +1,60 @@
+.list {
+  margin: auto;
+  text-align: center;
+  padding: 10px;
+  /* border: 1px solid; */
+  border-color: black;
+  font-size: 30px;
+  /* text-align: center; */
+}
+
+.titleBar {
+  width: 100%;
+  padding: 4vh;
+  /* top: auto; */
+  background-color: powderblue;
+  text-align: center;
+  font-family: 'Work Sans', sans-serif;
+}
+
+
+* {
+    box-sizing: border-box;
+    scroll: smooth;
+    behavior: 'smooth';
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+    /* color: hotpink; */
+}
+
+.Genius {
+  color: black;
+  margin: auto;
+  padding-top: 1.5vh;
+  font-size: 3vh;
+  width: 12%;
+  font-family: 'Work Sans', sans-serif;
+  font-size: black;
+  border: solid black 0.5vh;
+}
+.Genius:hover {
+  background-color: black;
+  color: white;
+}
+
+.songNumber {
+  /* position: absolute; */
+  /* margin: auto; */
+  /* width: 100%; */
+  font-family: 'Work Sans', sans-serif;
+  color: black;
+  text-align: center;
+  /* background-color: yellow; */
+  font-size: 5vh;
+}

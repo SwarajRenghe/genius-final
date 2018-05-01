@@ -1,0 +1,90 @@
+{% extends 'basicHTML.html' %}
+
+{% block head %}
+  <!-- <link rel=stylesheet type=text/css href="{{ url_for('static', filename='addUser.css') }}"> -->
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='addUser.css') }}">
+{% endblock %}
+{% block title %}
+  Add User
+{% endblock %}
+
+{% block body %}
+<div class="bg1"> </div>
+
+<div class="Title"> Register </div>
+
+<div class="inputForm">
+  <form action="http://localhost:5000/newUserHandlingPage" method="POST" onsubmit="return checkForm(this);"
+    <fieldset>
+        <input type="text" name="username" autofocus placeholder="User Name" required>
+          <br>
+     <input type="text" name="email" placeholder="Email-Id" required>
+          <br>
+        <input type="password" name="pwd1" placeholder="Password" required>
+          <br>
+        <input type="password" name="pwd2" placeholder="Re-enter Password" required>
+          <br>
+
+          <input type = "checkbox" name = "checkArtist" value = "checkArtist" style="font-size: 2vh "> I am an artist
+          <br>
+
+        <textarea name="bio" placeholder="A brief description of yourself" rows = "3" columns = "160">
+        </textarea>
+        <input type="text" name="profilePicture" placeholder="Link to Profile Picture">
+          <br>
+
+        <input type="submit" value="Register">
+    </fieldset>
+  </form>
+</div>
+
+
+  <script type="text/javascript">
+  function checkForm(form)
+  {
+    if(form.username.value == "") {
+      alert("Error: Username cannot be blank!");
+      form.username.focus();
+      return false;
+    }
+    re = /^\w+$/;
+    if(!re.test(form.username.value)) {
+      alert("Error: Username must contain only letters, numbers and underscores!");
+      form.username.focus();
+      return false;
+    }
+    if(form.pwd1.value != "" && form.pwd1.value == form.pwd2.value) {
+      if(form.pwd1.value.length < 6) {
+        alert("Error: Password must contain at least six characters!");
+        form.pwd1.focus();
+        return false;
+      }
+      // if(form.pwd1.value == form.username.value) {
+      //   alert("Error: Password must be different from Username!");
+      //   form.pwd1.focus();
+      //   return false;
+      // }
+      re = /[0-9]/;
+      if(!re.test(form.pwd1.value)) {
+        alert("Error: password must contain at least one number (0-9)!");
+        form.pwd1.focus();
+        return false;
+      }
+      re = /[a-z]/;
+      if(!re.test(form.pwd1.value)) {
+        alert("Error: password must contain at least one lowercase letter (a-z)!");
+        form.pwd1.focus();
+        return false;
+      }
+  
+    } else {
+      alert("Error: Please check that you've entered and confirmed your password!");
+      form.pwd1.focus();
+      return false;
+    }
+    // alert("You entered a valid password: " + form.pwd1.value);
+    return true;
+  }
+</script>
+  
+{% endblock %}

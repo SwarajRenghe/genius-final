@@ -1,0 +1,116 @@
+.songTitle {
+  margin: auto;
+  text-align: center;
+  font-size: 12vh;
+  color: red;
+}
+
+.albumArt {
+  position: absolute;
+  top: 12%;
+  left: 80%;
+}
+
+.titleBar {
+  width: 100%;
+  padding: 4vh;
+  /*margin-top: 2vh;*/
+  /* top: auto; */
+  background-color: powderblue;
+  text-align: center;
+  font-family: 'Work Sans', sans-serif;
+}
+
+
+.lyrics {
+  border: 1px solid;
+  border-color: black;
+  border-spacing: 2px;
+  padding: 8px;
+  /* margin: auto; */
+  font-size: 2vh;
+  width: 75%;
+  text-align: left;
+  color: blue;
+}
+
+.annotation {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 3vh; 
+  /*position: absolute;*/
+  text-align: center;
+  float: right;
+  align-self: right;
+  /*align-content: right;*/
+  margin-right: 3%;
+  margin-top: 2%;
+  width: 25%;
+  /*height: 45%;*/
+  /*top: 62%;*/
+  left: 71%;
+}
+
+
+/* .annotation:hover {
+  top: 70%;
+  transition: ease 1s;
+} */
+
+.artistName {
+  margin: auto;
+  text-align: center;
+  padding: 1vh;
+  font-size: 8vh;
+  /* color: red; */
+}
+
+.makeAnnotationButton {
+  align-self: right;
+  align-items: right;
+  float: right;
+  margin-top: 1%;
+  font-size: 4vh;
+  margin-right: 3%;
+  /*border: solid black 1vh;*/
+}
+
+.showAnnotationButton {
+  align-self: left;
+  margin-top: 1%;
+  align-items: left;
+  float: left;
+  font-size: 4vh;
+  margin-left: 3%;
+  border: solid black 1vh;
+}
+
+
+.lyric {
+  margin-top: 1%;
+  float: left;
+  margin-left: -5%;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 3vh;
+  text-align: center;
+  width: 50%;
+  /* border: solid black 1px; */
+}
+
+.actualAnnotations {
+  margin-top: 1%;
+  /*margin-left: 3%;*/
+  font-family: 'Work Sans', sans-serif;
+  /*position: absolute;*/
+  /*top: 45%;*/
+  /*left: 2%;*/
+  float: left;
+  /*margin-left: 3%;*/
+  width: 30%;
+  background-color: white;
+  text-align: center;
+}
+
+.goHome {
+  font-size: 6vh;
+  color: green;
+}

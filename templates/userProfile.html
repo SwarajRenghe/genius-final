@@ -1,0 +1,78 @@
+{% extends 'basicHTML.html' %}
+
+{% block head %}
+  
+    <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='userProfile.css') }}">
+
+{% endblock %}
+
+{% block title %}
+Profile
+{% endblock %}
+
+
+{% block body %}
+
+<br><br>
+
+<div class="row" id="profile-header"> 
+    <!-- <div class="profile-header"> -->
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-3">
+            <img src="{{ userData.profilePicture }}" class="img-circle" alt="user">
+        </div>
+        <div class="col-sm-3">
+            <!-- <div class="row" id="text-username"> -->
+                <p style="font-size: 8vh"> @{{ userData.username }} </p>
+            <!-- </div> -->
+            <!-- <div class="row" id="text-contributor"> -->
+                <p style="font-size: 4vh"> CONTRIBUTOR </p>
+            <!-- </div> -->
+
+        </div>
+        <div class="col-sm-3"> </div>
+        <div class="col-sm-1"> <a href="/logout"> Log Out </a></div>
+</div> 
+<br><br><br><br>
+<div class="container-fluid">
+    <div class="row" id="main-body-elements">
+        <div class="col-sm-1"> </div>
+        <div class="col-sm-5" id="bio-data">
+            <br>
+            <p style = "font-size: 4vh"> {{ userData.bio }} </p>
+            <br><br> 
+        </div>
+        <div class="col-sm-1"></div>
+
+        <div class="col-sm-5">
+      
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>POSTS</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>post1</td>
+                      </tr>
+                      <tr>
+                        <td>post2</td>
+                      </tr>
+                      <tr>
+                        <td>post3</td>
+                      </tr>
+                       <tr>
+                        <td>post4</td>
+                      </tr>
+                      <tr>
+                        <td>post5</td>
+                      </tr>
+                      <tr>
+                        <td>post6</td>
+                      </tr>
+                    </tbody>
+                </table>
+        </div>
+
+{% endblock %}

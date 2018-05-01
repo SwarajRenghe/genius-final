@@ -1,0 +1,16 @@
+{% extends 'basicHTML.html' %}
+
+{% block head %}
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='allSongs.css') }}">
+{% endblock %}
+
+{% block title %}
+  Songs
+{% endblock %}
+
+{% block body %}
+  {% for i in users %}
+    <div class="list"> <p> {{ i.userid }}. {{ i.username }} - with rank {{ i.userrank }}</p> </div>
+    <br>
+  {% endfor %}
+{% endblock %}

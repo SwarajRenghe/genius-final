@@ -1,0 +1,18 @@
+{% extends 'basicHTML.html' %}
+
+{% block title %}
+  Added Song
+{% endblock %}
+
+{% block head %}
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='songDatabaseEmpty.css') }}">
+{% endblock %}
+
+{% block body %}
+<br><br><br>
+<div style="margin: auto; text-align: center;">
+  <h1 style="padding-top: 3vh;"> Your Song has been added succesfully. </h1>
+  <br><br><br>
+  <h3> <a href="/"> Go Back </a> </h3>
+</div>
+{% endblock %}

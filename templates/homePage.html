@@ -1,0 +1,36 @@
+{% extends 'basicHTML.html' %}
+{% block head %}
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='homePage.css') }}">
+{% endblock %}
+
+{% block title %}
+	Home Page
+{% endblock %}
+
+{% block body %}
+
+<div class="bg1"></div>
+
+
+<div class="Genius"> Genius </div>
+
+
+<div class="loginFormDiv">
+<form  action="http://localhost:5000/loginVerification" method='POST'>
+	<fieldset>
+		<!-- <legend> &nbsp; Song Information </legend> -->
+
+			<label for="username" style="font-size: 3vh;"> <b>  User Name </b> </label>
+			<input type="text" style="text-align: center" placeholder="Enter User Name" name="username" required>
+
+			<label for="password" style="font-size: 3vh;"> <b> Password </b> </label>
+			<input type="password" style="text-align: center;" placeholder="Enter Password" name="password" required>
+
+			<button type="submit" class="btn loginButton"> Login </button>
+			<br>
+			<a href="/addUser"> <button class="btn registerButton"> New User? Register Here! </button> </a>
+	</fieldset>
+</form>
+</div>
+
+{% endblock %}

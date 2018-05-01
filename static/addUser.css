@@ -1,0 +1,53 @@
+body, html {
+    height: 100%;
+}
+
+/*white-space: pre;*/
+/*white-space: pre-line;*/
+
+.Title {
+  position: absolute;
+  top: 8%;
+  left: 37%;
+  font-size: 15vh;
+  color: white;
+  font-family: 'Work Sans', sans-serif;
+}
+
+.bg1 {
+    /* The image used */
+    /*position: absolute;*/
+
+    background-image: url("./images/beatles.jpg");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: black;
+}
+
+.inputForm {
+  position: absolute;
+  top: 34%;
+  left: 40%;
+  width: 20%;
+  color: white;
+  font-size: 2vh;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  font-size: 2vh;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  text-align: center;
+}
+
+input[type="checkbox"]{
+  zoom: 1.5;
+}

@@ -1,0 +1,45 @@
+body, html {
+    height: 100%;
+}
+
+white-space: pre;
+white-space: pre-line;
+
+.title {
+  position: absolute;
+  top: 8%;
+  left: 33%;
+  font-size: 15vh;
+  color: white;
+  font-family: 'Work Sans', sans-serif;
+
+}
+
+.bg1 {
+    /* The image used */
+    background-image: url("http://arts.events.mjc.edu/files/2016/04/concert-crowd-at-live-music-festival-m.jpg");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.inputForm {
+  position: absolute;
+  top: 34%;
+  left: 40%;
+  width: 20%;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  font-size: 2vh;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  text-align: center;
+}
