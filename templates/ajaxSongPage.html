@@ -107,32 +107,35 @@ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="ano
     }
 
     var num;
-    function getLineNum(){
+
+    function getLineNum()
+    {
       var brk;
       var pos =0;
       num = -1;
       var i = -1;
-      while(pos!=-1) {
-        pos = x.indexOf("<br>", i+1)
+      while(pos!=-1) 
+      {
+        pos = x.indexOf("<br>", i+1);
         array.push(pos -  1);
         num+=1;
         i=pos;
       }
-      console.log(num)
-      console.log(array)
+      console.log(num);
+      console.log(array);
     }
 
 
     function getSelText() {
       document.aform.buttonForSongNumber.value =  {{ songNumber }};
-      GetData()
-      getLineNum()
+      GetData();
+      getLineNum();
       var txt = '';
       if (window.getSelection) {
         txt = window.getSelection();
 
-        console.log(txt.toString())
-        var gotit = txt.toString()
+        console.log(txt.toString());
+        var gotit = txt.toString();
         var newstr;
         gotit = gotit.toString();
         console.log("len="+ gotit.length);
@@ -144,14 +147,20 @@ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="ano
               // newstr = gotit.slice(0,gotit.length);
               newstr = gotit.trim()
             }
-            console.log(newstr)
-            var morevars = x.indexOf(gotit)
-            morevars = morevars.toString()
-            morevars = morevars.replace(/^(\s+<br( \/)?>)*|(<br( \/)?>\s)*$/gm, '')
+            console.log(newstr);
+            var morevars = x.indexOf(gotit);
+            morevars = morevars.toString();
+            morevars = morevars.replace(/^(\s+<br( \/)?>)*|(<br( \/)?>\s)*$/gm, '');
+            for(i = 0; i < num; i++)
+            {
+              if(morevars <= array[i])
+              {
+                console.log(i);
+              }
+            }
+            console.log("offset = " + txt.anchorOffset);
 
-            console.log("offset = " + txt.anchorOffset)
-
-            console.log("offset = " + txt.anchorOffset)
+            // console.log("offset = " + txt.anchorOffset)
           }
           else if (document.getSelection) {
             txt = document.getSelection();
@@ -193,9 +202,11 @@ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="ano
             var t1="<div class='row'><div class='col-sm-2' >"+data['upic']+"</div><div class='col-sm-2'>"+data['uname']+"</div><div class='col-sm-6' style='text-align: center; font-size:20px;font-weight:200; padding-bottom:5px;padding-top: 5px'>"+songComment+"</div><div class='col-sm-2'></div></div>";
             $("#emptydiv").before(t1);
           });
-
+          setTimeout(function (){location.reload();}, 2000);
+          // location.reload();
 
         }
+
 
 
     </script>
@@ -302,7 +313,7 @@ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="ano
        </div>
        <div class="col-sm-2" id="user-pic">
 
-         <img src="{{ j.comm_users.profilePicture }}" class="img-circle" alt="user" style="height: 50px; width: 50px">
+         <img src="{{ j.comm_users.profilePicture }}" alt="user" style="height: 50px; width: 50px">
 
        </div>
        <div class="col-sm-1" id="user-details">

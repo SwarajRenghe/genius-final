@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, redirect, url_for, Response, json
-# from songs import returnSongs
+
 from flask_login import current_user, LoginManager, UserMixin, login_user, logout_user, login_required
 from sqlalchemy import exc
 from passlib.hash import sha256_crypt
@@ -87,7 +87,7 @@ def loginVerification():
 			# print "yeeeeeeeeeeeeeeet"
 			userData = returnUserData(entered_username)
 			# print (userData.isArtist == str(userData.isArtist))
-			if str(userData.isArtist) == "checkArtist":
+			if str(userData.isArtist) == "1":
 				# print "is artist"
 				songList = returnArtistSongData(userData.id)
 				return redirect(url_for("profilePage"))
@@ -273,7 +273,10 @@ def newAnnotationHandling():
 
 		annotateText = Annotations(theAnnotation, current_user.id, songNumber, startline, endline)
 		addAnnotationToDatabase (annotateText)
-		return "added annotation successfully"
+		# return redirect(url_for(song(int(songNumber))))
+		# return render_template
+		return song(int(songNumber))
+		# return "added annotation successfully"
 
 @app.route('/searchQuery', methods=['GET'])
 def searchQuery():
