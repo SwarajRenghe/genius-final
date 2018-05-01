@@ -2,6 +2,8 @@
 
 {% block head %}
   <link rel=stylesheet type=text/css href="{{ url_for('static', filename='individualSongs.css') }}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"
+integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 {% endblock %}
   {{ songNumber }}
 {% block title %}
@@ -192,6 +194,25 @@
 
     var s = document.getElementById('lyrics').innerHTML;
     console.log(s.nl2br());
+    function returnSongNumber()
+        {
+          var songComment = document.getElementById('commentSongC').value;
+          var songNumberC={{songNumber}};
+          let datas={sumber:songNumberC, somment:songComment};
+          let request=$.ajax({url:'http://localhost:5000/newCommentPage',method:'PUT',data:JSON.stringify(datas),contentType: 'application/json'});
+          console.log(datas['sumber']);
+          console.log(datas['somment']);
+          request.done(function(data){
+            console.log(data['message']);
+
+            var t1="<div class='row'><div class='col-sm-2' >"+data['upic']+"</div><div class='col-sm-2'>"+data['uname']+"</div><div class='col-sm-6' style='text-align: center; font-size:20px;font-weight:200; padding-bottom:5px;padding-top: 5px'>"+songComment+"</div><div class='col-sm-2'></div></div>";
+            $("#emptydiv").before(t1);
+          });
+
+
+        }
+
+
 </script>
 
 <br><br>

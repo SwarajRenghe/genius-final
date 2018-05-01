@@ -51,19 +51,22 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="nav text-uppercase justify-content-center    ">
-                <li class="nav-item" style="text-align: left;">
+            <ul class="nav text-uppercase justify-content-center">
+<!--                 <li class="nav-item" style="text-align: left;">
                     <a class="nav-link js-scroll-trigger" style="padding-left: 1vh; color: white; font-size: 17px"> GENIUS </a>
-                </li>
+                </li> -->
                 
                 <li class="nav-item" style="text-align: center">
                     <a class="nav-link js-scroll-trigger" href="/songs" style="padding-left: 45vh; padding-right: 6vh color: white; font-size: 17px"> All Songs </a>
                 </li>
           
         
-                <li class="nav-item">
+<!--                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" style="padding-right: 6vh" href="/moreinfo"> More Info </a>
-                </li>
+                </li> -->
+
+                {% block titleBarElement %} {% endblock %}
+
             
             </ul>
         </div>

@@ -23,7 +23,7 @@ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="ano
       for (i = 0; i < annotationDataForThisSong.length; i++) {
         if (lineNumber >= annotationDataForThisSong[i][2] && lineNumber <= annotationDataForThisSong[i][3]) {
           document.getElementById('lyrics').style.transition = "all 1s";
-          document.getElementById('lyrics').style.marginLeft = "0%";
+          document.getElementById('lyrics').style.marginLeft = "5%";
           // document.getElementById('aform').style.
           // document.getElementById('allOfMakeAnnotation').style.marginRight = "-20%";
           document.getElementById('allOfMakeAnnotation').style.opacity = "0"
@@ -83,10 +83,11 @@ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="ano
       document.getElementById('lyrics').style.marginLeft = "-5%";
       document.getElementById('actualAnnotations').style.marginLeft = "0%"
       document.getElementById('actualAnnotations').style.transition = "all 1s";
-        // document.getElementById('showAnnotationButton').style.marginLeft = "-20%"
-        document.getElementById('annotation1').style.transition = "all 1s";
-        // document.getElementById('showAnnotationButton').style.transition = "all 1s";
-        document.getElementById('annotation1').style.opacity = '0';
+      document.getElementById('allOfMakeAnnotation').style.transition = "all 1s";
+      // document.getElementById('showAnnotationButton').style.marginLeft = "-20%"
+      // document.getElementById('annotation1').style.transition = "all 1s";
+      // document.getElementById('showAnnotationButton').style.transition = "all 1s";
+      // document.getElementById('annotation1').style.opacity = '0';
         showAnnotationsOrNot = 0;
       }
       else {
@@ -95,8 +96,8 @@ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="ano
         document.getElementById('lyrics').style.marginLeft = "5%";
         document.getElementById('actualAnnotations').style.marginLeft = "-40%"
         document.getElementById('actualAnnotations').style.transition = "all 1s";
-        document.getElementById('annotation1').style.transition = "all 1s";
-        document.getElementById('annotation1').style.opacity = '1';
+        // document.getElementById('annotation1').style.transition = "all 1s";
+        // document.getElementById('annotation1').style.opacity = '1';
         showAnnotationsOrNot = 1;
       } 
     }
@@ -180,6 +181,7 @@ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="ano
 
         var s = document.getElementById('lyrics').innerHTML;
         console.log(s.nl2br());
+        
         function returnSongNumber()
         {
           var songComment = document.getElementById('commentSongC').value;
@@ -199,7 +201,10 @@ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="ano
         }
 
 
-      </script>
+    </script>
+
+
+
       <!-- {% set count = 1 %} -->
       <br><br>
       <!-- <div id="lyric-main"> -->
@@ -218,10 +223,25 @@ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="ano
 
 
 
+        <div class="actualAnnotations" id="actualAnnotations" style="opacity: 1">
+          <div class="row">
+            <p id="brs" style="display: none">  </p>
+          </div>
+
+
+          {% for k in annotationDataForThisSong %}
+          <div id="srow{{ loop.index }}" class="row" style="margin: 0; font-size: 3vh; display: none">
+            <div class="col-sm">
+              {{ k[0] }} by {{ k[1] }}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
         <div class="container lyric" id="lyrics" style="text-align: center; width: auto;" >
           {% for j in song[5] %}
           {% if loop.index in allAnnotationLineNumbers %} 
-          <p style="background-color: lightblue; width: auto; margin: 0" class="xoxo" onclick="showAnnotationCorrespondingToThis({{ loop.index }})"> {{loop.index}}{{ j }} </p>
+          <p style="background-color: lightblue; width: auto; margin: 0" class="xoxo" onclick="showAnnotationCorrespondingToThis({{ loop.index }})"> {{ j }} </p>
 
           {% else %} 
           <p style="width: auto; margin: 0" class="xoxo"> {{ j }} </p>
@@ -229,6 +249,7 @@ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="ano
           {% endfor %}
 
           <br><br>
+        </div>
 
 
           <!-- <div class="container_lyric" id="lyrics" style="text-align: center"> -->
@@ -239,35 +260,11 @@ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="ano
               <!-- {{ i.lyric.replace('\n','<br />') | safe }} -->
               <!-- {% for j in i.lyric -%}{{ j.replace('\n', '<br />') | safe }}{% endfor %} -->
 
-            </div>
-            <div class="actualAnnotations" id="actualAnnotations" style="opacity: 1">
-              <div class="row">
-
-                <p id="brs" style="display: none">  </p>
-
-            <!-- <div class="col-sm" style="font-size: 3vh;">
-              Annotations
-            </div> -->
-          </div>
-
-
-          {% for k in annotationDataForThisSong %}
-          <div id="srow{{ loop.index }}" class="row" style="margin: 0
-          ; font-size: 3vh; display: none">
-          <div class="col-sm">
-            {{ k[0] }} by {{ k[1] }}
-          </div>
-        </div>
-        {% endfor %}
-      </div>
-      
-
-
-      <div id="allOfMakeAnnotation" class="container">
-        <button class="makeAnnotationButton btn btn-primary" id="showAnnotationButton" onclick="showMakeAnnotationButtonPressed()">
+      <div id="allOfMakeAnnotation" class="container allOfMakeAnnotation">
+        <button class="btn btn-primary" id="showAnnotationButton" onclick="showMakeAnnotationButtonPressed()">
           Make Annotations
         </button> <br><br><br>
-        <div class="annotation" id="annotation1" style="opacity: 0">
+        <div id="annotation1" style="opacity: 1">
           <input type="button" value="Get selection" onmousedown="getSelText()">
           <form action='http://localhost:5000/newAnnotationPage' name="aform" id="aform" style="display: block;">
             <textarea id="buttonForSongNumber" name="buttonForSongNumber" style="visibility: hidden"></textarea>
@@ -354,3 +351,4 @@ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="ano
 </div> -->
 
 {% endblock %}
+  
