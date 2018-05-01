@@ -64,13 +64,23 @@
   /* color: red; */
 }
 
+.allOfMakeAnnotation {
+  margin-top: 1%;
+  float: left;
+  margin-left: 0%;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 3vh;
+  text-align: center;
+  width: 10%;
+}
+
 .makeAnnotationButton {
   align-self: right;
-  align-items: right;
+  align-items: left;
   float: right;
   margin-top: 1%;
   font-size: 4vh;
-  margin-right: 3%;
+  /*margin-right: 0%;*/
   /*border: solid black 1vh;*/
 }
 
@@ -105,7 +115,7 @@
   /*left: 2%;*/
   float: left;
   /*margin-left: 3%;*/
-  width: 30%;
+  width: 25%;
   background-color: white;
   text-align: center;
 }

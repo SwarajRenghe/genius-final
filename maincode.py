@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, redirect, url_for, Response, json
+
 from flask_login import current_user, LoginManager, UserMixin, login_user, logout_user, login_required
 from sqlalchemy import exc
 from passlib.hash import sha256_crypt
@@ -48,8 +49,23 @@ def addUser():
 @app.route('/logout')
 @login_required
 def logout():
-	logout_user()
-	return render_template('homePage.html')
+	try:
+		logout_user()
+		return render_template('homePage.html')
+	except BuildError:
+		return "you must be logged in to access this page"
+
+@app.route('/profile')
+@login_required
+def profilePage():
+	userData = returnUserData(current_user.username)
+	if str(userData.isArtist) == "checkArtist":
+		# print "is artist"
+		songList = returnArtistSongData(userData.id)
+		return render_template ('artistProfile.html', userData=userData, songList=songList)
+	else:
+		# print "is not artist"
+		return render_template ('userProfile.html', userData=userData)
 
 @app.route('/loginVerification', methods=['GET', 'POST'])
 def loginVerification():
@@ -299,7 +315,7 @@ def song(songNumber = None):
 		commentList = returnCommentDatabase()
 
 		if songNumber is None:
-			return render_template('allSongs.html', songs=songList)
+			return render_template('allSongs.html', songs=songList, is_authenticated=current_user.is_authenticated)
 		else:
 			song = returnSong (songNumber)
 			annotationDataForThisSong = getAnnotationData(songNumber)
@@ -307,7 +323,7 @@ def song(songNumber = None):
 			temp = allAnnotationLineNumbers(songNumber)
 			# print "/////////////////////////"
 			print temp
-			return render_template('individualSongs.html', songNumber=songNumber, song=song, songs=songList, comments=commentList, allAnnotationLineNumbers=temp, annotationDataForThisSong=annotationDataForThisSong)
+			return render_template('ajaxSongPage.html', songNumber=songNumber, song=song, songs=songList, comments=commentList, allAnnotationLineNumbers=temp, annotationDataForThisSong=annotationDataForThisSong)
 			#render ajaxSongPage.html
 	except exc.OperationalError:
 		return render_template('songDatabaseEmpty.html')
