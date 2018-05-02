@@ -42,10 +42,12 @@ def addPost():
 def newPostHandling():
 	userID = current_user.id
 	post = request.form['post']
+	print '*********'
+	print post
 	picture = request.form['optionalPicture']
 	if not picture:
 		picture = 'https://d30y9cdsu7xlg0.cloudfront.net/png/26260-200.png'
-	addPostToDatabase(post, picture)
+	addPostToDatabase(post, picture, userID)
 	return redirect(url_for('profilePage'))
 
 @app.route('/users')

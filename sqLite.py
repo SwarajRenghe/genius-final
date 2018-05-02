@@ -23,13 +23,14 @@ class Posts (UserMixin, Base):
     likes = Column(Integer)
     user_id = Column(Integer, ForeignKey('users.id'))
 
-    def __init__(self, post, pic):
-        self.posts = post
+    def __init__(self, post, pic, id):
+        self.post = post
         self.picture = pic
+        self.user_id = id
 
-def addPostToDatabase(post, picture):
+def addPostToDatabase(post, picture, id):
     session = Session()
-    temp = Posts (post, picture)
+    temp = Posts (post, picture, id)
     session.add(temp)
     session.commit()
     session.close()
@@ -420,7 +421,7 @@ def updatePassword(id, password, bio, dp):
 
 def returnAllArtistIDs():
     session = Session()
-    query = session.query(User).filter_by(isArtist="checkArtist").all()
+    query = session.query(User).filter_by(isArtist="1").all()
     artistIDs = []
     for i in query:
         x = []
