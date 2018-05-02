@@ -268,12 +268,12 @@ def newAnnotationHandling():
 		print "end char"
 		print endingCharacter2
 
-		if startingCharacter1 is -1:
-			startingCharacter = startingCharacter2 + 15
-			endingCharacter = endingCharacter2 +15
-		else:
-			startingCharacter = startingCharacter1
-			endingCharacter = endingCharacter1
+		# if startingCharacter1 is -1:
+		startingCharacter = startingCharacter2 + 15
+		endingCharacter = endingCharacter2 
+		# else:
+		# 	startingCharacter = startingCharacter1
+		# 	endingCharacter = endingCharacter1
 
 		# print s.find(m[0])
 		# print s.find(m[-1])
