@@ -7,6 +7,15 @@
 	Home Page
 {% endblock %}
 
+{% block titleBarElement %} 
+<form style="margin-left: 10vh;" action="/searchQuery" name="searchQuery" method="GET">
+  <div class="form-group">
+    <input type="text" name="searchQuery" placeholder="search.."  style="width: 100%; font-size: 2vh; padding: 1vh; margin: 0; margin-top: 1vh; border: none;">
+    <!-- <small id="emailHelp" class="form-text text-muted" style="color: white;"> Search for a song or an annotation </small> -->
+  </div>
+</form>
+{% endblock %}
+
 {% block body %}
 
 <div class="bg1"></div>

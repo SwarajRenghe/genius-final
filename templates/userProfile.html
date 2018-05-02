@@ -12,15 +12,23 @@ Profile
 
 {% block titleBarElement %} 
     <li class="nav-item" style="text-align: center">
-        <a class="nav-link js-scroll-trigger" href="/logout" style="padding-left: 45vh; padding-right: 6vh color: white; font-size: 17px"> Logout </a>
+        <a class="nav-link js-scroll-trigger" href="/logout" style="padding-right: 6vh color: white; font-size: 17px"> Logout </a>
     </li>
+    <li class="nav-item" style="text-align: center">
+      <a class="nav-link js-scroll-trigger" href="/editProfile.html" style="padding-right: 6vh;color: white; font-size: 17px"> Edit Profile </a>
+    </li>
+    <form style="margin-left: 10vh;" action="/searchQuery" name="searchQuery" method="GET">
+        <div class="form-group">
+            <input type="text" name="searchQuery" placeholder="search.."  style="width: 100%; font-size: 2vh; padding: 1vh; margin: 0; margin-top: 1vh; border: none;">
+        </div>
+    </form>
 {% endblock %}
 
 {% block body %}
 
 <br><br>
 
-<div class="row" id="profile-header"> 
+<div class="row" id="profile-header" style="width: 101%"> 
     <!-- <div class="profile-header"> -->
         <div class="col-sm-2"> </div>
         <div class="col-sm-3">
@@ -36,7 +44,7 @@ Profile
 
         </div>
         <div class="col-sm-3"> </div>
-        <div class="col-sm-1"> <a href="/logout"> Log Out </a></div>
+        <!-- <div class="col-sm-1"> <a href="/logout"> Log Out </a></div> -->
 </div> 
 <br><br><br><br>
 <div class="container-fluid">
@@ -54,28 +62,17 @@ Profile
                 <table class="table table-striped">
                     <thead>
                       <tr>
-                        <th>POSTS</th>
+                        <th> MY ANNOTATIONS </th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>post1</td>
-                      </tr>
-                      <tr>
-                        <td>post2</td>
-                      </tr>
-                      <tr>
-                        <td>post3</td>
-                      </tr>
-                       <tr>
-                        <td>post4</td>
-                      </tr>
-                      <tr>
-                        <td>post5</td>
-                      </tr>
-                      <tr>
-                        <td>post6</td>
-                      </tr>
+                      {% for i in annotationDataForThisUser %}
+                        <tr>
+                          <td> <a href="/songs/{{ i[0] }}" style=" color: black"> {{ loop.index }} </a> </td>
+                          <td> <a href="/songs/{{ i[0] }}" style=" color: black"> {{ i[1] }} </a> </td>
+                          <td> <a href="/songs/{{ i[0] }}" style="color: black"> {{ i[2] }} </a> </td>
+                        </tr>
+                      {% endfor %}
                     </tbody>
                 </table>
         </div>

@@ -1,0 +1,71 @@
+{% extends 'basicHTML.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block title %}
+Public Profile
+{% endblock %}
+
+{% block titleBarElement %} 
+    {% if is_authenticated %}
+        <li class="nav-item" style="text-align: center">
+            <a class="nav-link js-scroll-trigger" href="/logout" style="padding-right: 6vh; margin-left: 6vh; color: white; font-size: 17px"> Logout </a>
+        </li>
+    {% endif %}
+    <li class="nav-item" style="text-align: center">
+        <a class="nav-link js-scroll-trigger" href="/editProfile" style="padding-right: 6vh;color: white; font-size: 17px"> Home Page </a>
+    </li>
+    <form style="margin-left: 10vh;" action="/searchQuery" name="searchQuery" method="GET">
+        <div class="form-group">
+            <input type="text" name="searchQuery" placeholder="search.."  style="width: 100%; font-size: 2vh; padding: 1vh; margin: 0; margin-top: 1vh; border: none;">
+        </div>
+    </form>
+{% endblock %}
+
+{% block body %}
+	
+<br><br>
+
+<div class="row" id="profile-header">
+    <!-- <div class="profile-header"> -->
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-3">
+            <img src="{{ thisArtistData.profilePicture }}" class="img-circle" alt="artist">
+        </div>
+        <div class="col-sm-3">
+            <p style="font-size: 8vh"> @{{ thisArtistData.username }} </p>
+        </div>
+        <div class="col-sm-3"> </div>
+</div>
+<br><br><br><br>
+<div class="container-fluid">
+    <div class="row" id="main-body-elements">
+        <div class="col-sm-1"> </div>
+        <div class="col-sm-5" id="bio-data">
+            <br>
+            
+            <p style = "font-size: 4vh"> {{ thisArtistData.bio }} </p>
+            <br><br>
+        </div>
+        <div class="col-sm-1"></div>
+
+        <div class="col-sm-5">
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th> POSTS </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in postsForThisArtist %}
+                      <tr>
+                        <td> {{ loop.index }} </td>
+                        <td> {{ i[0] }} </td>
+                        <td> {{ i[1] }} </td>
+                      </tr>
+                        {% endfor %}
+                    </tbody>
+        </div>
+
+{% endblock %}

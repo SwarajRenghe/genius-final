@@ -13,9 +13,17 @@ Profile
 {% block titleBarElement %} 
     {% if is_authenticated %}
         <li class="nav-item" style="text-align: center">
-            <a class="nav-link js-scroll-trigger" href="/logout" style="padding-left: 45vh;padding-right: 6vh;color: white; font-size: 17px"> Logout </a>
+            <a class="nav-link js-scroll-trigger" href="/logout" style="padding-right: 6vh; margin-left: 6vh; color: white; font-size: 17px"> Logout </a>
         </li>
     {% endif %}
+    <li class="nav-item" style="text-align: center">
+        <a class="nav-link js-scroll-trigger" href="/editProfile" style="padding-right: 6vh;color: white; font-size: 17px"> Edit Profile </a>
+    </li>
+    <form style="margin-left: 10vh;" action="/searchQuery" name="searchQuery" method="GET">
+        <div class="form-group">
+            <input type="text" name="searchQuery" placeholder="search.."  style="width: 100%; font-size: 2vh; padding: 1vh; margin: 0; margin-top: 1vh; border: none;">
+        </div>
+    </form>
 {% endblock %}
 
 {% block body %}
@@ -29,13 +37,10 @@ Profile
             <img src="{{ userData.profilePicture }}" class="img-circle" alt="artist">
         </div>
         <div class="col-sm-3">
-            <!-- <div class="row" id="text-username"> -->
                 <p style="font-size: 8vh"> @{{ userData.username }} </p>
-            <!-- </div> -->
-            <!-- <div class="row" id="text-contributor"> -->
                 <p style="font-size: 4vh"> ARTIST </p>
                 <a href="/addSong" style="font-size: 2vh;"> Add Song </a>
-            <!-- </div> -->
+                <a href="/addPost" style="font-size: 2vh;"> Add Post </a>
 
         </div>
         <div class="col-sm-3"> </div>
@@ -64,10 +69,44 @@ Profile
                     <tbody>
                         {% for i in songList %}
                       <tr>
-                        <td> <a href="songs/{{ i.songnumber }}" style="color: black"> {{ i.songname }}</td>
+                        <td> <a href="songs/{{ i.songnumber }}" style="color: black"> {{ loop.index }} </a> </td>
+                        <td> <a href="songs/{{ i.songnumber }}" style="color: black"> {{ i.songname }} </a> </td>
                       </tr>
                         {% endfor %}
               
+                    </tbody>
+                </table>
+                <br>
+                <table class="table table-striped">
+                    <thead style="width: 40%">
+                      <tr style="width: 40%">
+                        <th style="width: 40%"> MY ANNOTATIONS </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for i in annotationDataForThisUser %}
+                        <tr>
+                          <td> <a href="/songs/{{ i[0] }}" style="text-decoration: none; color: black"> {{ loop.index }} </a> </td>
+                          <td> <a href="/songs/{{ i[0] }}" style="text-decoration: none; color: black"> {{ i[1] }} </a> </td>
+                          <td> <a href="/songs/{{ i[0] }}" style="text-decoration: none; color: black"> {{ i[2] }} </a> </td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                </table>
+                <table class="table table-striped">
+                    <thead style="width: 40%">
+                      <tr style="width: 40%">
+                        <th style="width: 40%"> MY POSTS </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for i in postsForThisArtist %}
+                        <tr>
+                          <td> {{ loop.index }} </a> </td>
+                          <td> {{ i[0] }} </td>
+                          <td> <img src="{{ i[1] }}" width="3vh" height="3vh"> </td>
+                        </tr>
+                      {% endfor %}
                     </tbody>
                 </table>
         </div>

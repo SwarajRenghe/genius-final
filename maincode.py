@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template, redirect, url_for, Response, json
 
 from flask_login import current_user, LoginManager, UserMixin, login_user, logout_user, login_required
-from sqlalchemy import exc
+from sqlalchemy import exc, update
 from passlib.hash import sha256_crypt
 import json
 from sqLite import *
@@ -23,11 +23,30 @@ def load_user(id):
 
 @app.route('/')
 def homePage():
-	return render_template ('homePage.html')
+	if not current_user.is_authenticated:
+		return render_template ('homePage.html')
+	else:
+		return redirect(url_for('profilePage'))
 
 @app.route('/addSong')
 def addSong():
 	return render_template('addSong.html')
+
+@app.route('/addPost')
+@login_required
+def addPost():
+	return render_template('addPost.html')
+
+@app.route('/newPost', methods=['POST'])
+@login_required
+def newPostHandling():
+	userID = current_user.id
+	post = request.form['post']
+	picture = request.form['optionalPicture']
+	if not picture:
+		picture = 'https://d30y9cdsu7xlg0.cloudfront.net/png/26260-200.png'
+	addPostToDatabase(post, picture)
+	return redirect(url_for('profilePage'))
 
 @app.route('/users')
 def users ():
@@ -59,18 +78,46 @@ def logout():
 @login_required
 def profilePage():
 	userData = returnUserData(current_user.username)
+	annotationDataForThisUser = returnAnnotationDataForThisUser(current_user.id)
+	print "annotationDataForThisUser = "
+	print annotationDataForThisUser
 	if str(userData.isArtist) == "checkArtist":
-		# print "is artist"
 		songList = returnArtistSongData(userData.id)
-		return render_template ('artistProfile.html', userData=userData, songList=songList)
+		postList = getPostsForThisArtist(current_user.id)
+		return render_template ('artistProfile.html', userData=userData, songList=songList, annotationDataForThisUser=annotationDataForThisUser, postsForThisArtist=postList)
 	else:
 		# print "is not artist"
-		return render_template ('userProfile.html', userData=userData)
+		return render_template ('userProfile.html', userData=userData, annotationDataForThisUser=annotationDataForThisUser)
+
+
+
+@app.route('/editProfile.html')
+@login_required
+def editProfileHTML():
+	return render_template('editProfile.html')	
+
+@app.route('/editProfile', methods=['GET', 'POST'])
+@login_required
+def editProfile():
+	if request.method == 'POST':
+		oldPassword = request.form['oldPassword']
+		entered_data = [current_user.username, oldPassword]
+		if isUserVerified(entered_data):
+			newPassword = str(request.form['pw2'])
+			userpassword = sha256_crypt.encrypt(newPassword)
+			bio = request.form['bio']
+			profilePicture = request.form['profilePicture']
+			updatePassword(current_user.id, userpassword, bio, profilePicture)
+			return redirect(url_for("profilePage"))
+		else:
+			print "wrong password"
+			return "didnt match"
+	else:
+		return "Gett"
 
 @app.route('/loginVerification', methods=['GET', 'POST'])
 def loginVerification():
 	if request.method == 'POST':
-
 		entered_username = request.form['username']
 		entered_password = request.form['password']
 		entered_data = [entered_username, entered_password];
@@ -85,10 +132,12 @@ def loginVerification():
 			if str(userData.isArtist) == "1":
 				# print "is artist"
 				songList = returnArtistSongData(userData.id)
-				return render_template ('artistProfile.html', userData=userData, songList=songList)
+				return redirect(url_for("profilePage"))
+				# return render_template ('artistProfile.html', userData=userData, songList=songList)
 			else:
 				# print "is not artist"
-				return render_template ('userProfile.html', userData=userData)
+				return redirect(url_for("profilePage"))
+				# return render_template ('userProfile.html', userData=userData)
 		else:
 			return "false"
 
@@ -331,11 +380,15 @@ def newAnnotationHandling():
 		return song(int(songNumber))
 		# return "added annotation successfully"
 
+@app.route('/searchQuery', methods=['GET'])
+def searchQuery():
+	searchQuery = request.args.get('searchQuery')
+	data = searchForThisText(searchQuery)
+	return render_template('search.html', data=data)
 
 @app.route('/newUserHandlingPage', methods=['GET', 'POST'])
 def newUserHandling():
 	if request.method == 'POST':
-	
 		username = request.form['username']
 		password = str(request.form['pwd2'])
 		userpassword = sha256_crypt.encrypt(password)
@@ -386,12 +439,24 @@ def song(songNumber = None):
 			temp = allAnnotationLineNumbers(songNumber)
 			# print "/////////////////////////"
 			print temp
-			return render_template('ajaxSongPage.html', songNumber=songNumber, song=song, songs=songList, comments=commentList, allAnnotationLineNumbers=temp, annotationDataForThisSong=annotationDataForThisSong)
+			return render_template('ajaxSongPage.html', is_authenticated=current_user.is_authenticated, songNumber=songNumber, song=song, songs=songList, comments=commentList, allAnnotationLineNumbers=temp, annotationDataForThisSong=annotationDataForThisSong)
 			#render ajaxSongPage.html
 	except exc.OperationalError:
 		return render_template('songDatabaseEmpty.html')
 
-# @app.route('')
+@app.route('/publicArtistProfile')
+@app.route('/publicArtistProfile/<int:artistID>')
+def publicArtistProfile(artistID = None):
+	try:
+		if artistID is None:
+			allArtistIDs = returnAllArtistIDs()
+			return render_template('allArtists.html', is_authenticated=current_user.is_authenticated, allArtistIDs=allArtistIDs)
+		else:
+			postsForThisArtist = getPostsForThisArtist(artistID)
+			thisArtistData = returnUserDataByUserID(artistID)
+			return render_template('publicArtistProfiles.html', thisArtistData=thisArtistData, is_authenticated=current_user.is_authenticated, postsForThisArtist=postsForThisArtist)
+	except exc.OperationalError:
+		return "Posts Database Empty"
 
 @app.errorhandler(404)
 def page_not_found(e):
