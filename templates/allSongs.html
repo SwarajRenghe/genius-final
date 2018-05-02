@@ -11,16 +11,22 @@
 {% block titleBarElement %} 
     {% if is_authenticated %}
         <li class="nav-item" style="text-align: center">
-            <a class="nav-link js-scroll-trigger" href="/profile" style="padding-left: 4vh;padding-right: 6vh;color: white; font-size: 17px"> Profile Page </a>
+            <a class="nav-link js-scroll-trigger" href="/profile" style="color: white; font-size: 17px"> Profile Page </a>
         </li>
         <li class="nav-item" style="text-align: center">
-            <a class="nav-link js-scroll-trigger" href="/logout" style="padding-right: 6vh;color: white; font-size: 17px"> Logout </a>
+            <a class="nav-link js-scroll-trigger" href="/logout" style="color: white; font-size: 17px"> Logout </a>
         </li>
     {% else %}
         <li class="nav-item" style="text-align: center">
-            <a class="nav-link js-scroll-trigger" href="/" style="padding-left: 45vh;padding-right:6vh;color: white;font-size: 17px"> Go to HomePage </a>
+            <a class="nav-link js-scroll-trigger" href="/" style="color: white;font-size: 17px"> Go to HomePage </a>
         </li>
     {% endif %}
+    <form style="margin-left: 10vh;" action="/searchQuery" name="searchQuery" method="GET">
+      <div class="form-group">
+        <input type="text" name="searchQuery" placeholder="search.."  style="width: 100%; font-size: 2vh; padding: 1vh; margin: 0; margin-top: 1vh; border: none;">
+        <!-- <small id="emailHelp" class="form-text text-muted" style="color: white;"> Search for a song or an annotation </small> -->
+      </div>
+    </form>
 {% endblock %}
 
 {% block body %}
@@ -36,6 +42,14 @@
 
 <br><br>
 
+<style>
+  .link {
+    color: black;
+  }
+  .link:hover{
+    color: blue;
+  }
+</style>
 
 {% for i in songs %}
 
@@ -48,7 +62,7 @@
       <div class="col-sm-8" style="text-align: left; width: 75%;">
         <a href="songs/{{ i.songnumber }}" class="songNumber" style=" font-size: 6vh;"> {{ i.songnumber }}. {{ i.songname }}</a>
         <br>
-        <p class="songNumber" style="font-size: 4vh;"> {{ i.artist }} </p>
+        <p class="songNumber" style="font-size: 4vh;"> <a href="/publicArtistProfile/{{ i.artist_id }}" class="link"> {{ i.artist }} </a> </p>
       </div>
     </div>
     </li>

@@ -80,8 +80,8 @@ def logout():
 @login_required
 def profilePage():
 	userData = returnUserData(current_user.username)
-	print "user dataaaaaaaaaaa"
-	print userData
+	# print "user dataaaaaaaaaaa"
+	# print userData
 	annotationDataForThisUser = returnAnnotationDataForThisUser(current_user.id)
 	print "annotationDataForThisUser = "
 	print annotationDataForThisUser
@@ -100,7 +100,7 @@ def profilePage():
 def editProfileHTML():
 	return render_template('editProfile.html')	
 
-@app.route('/editProfile', methods=['GET', 'POST'])
+@app.route('/editProfile', methods=['POST'])
 @login_required
 def editProfile():
 	if request.method == 'POST':
@@ -237,73 +237,20 @@ def newCommentHandling():
 		)
 
 
-@app.route('/newAnnotationPage')
+@app.route('/newAnnotationPage', methods=['POST'])
 @login_required
 def newAnnotationHandling():
 	if request.method == 'POST':
 		tempAnnotation = request.form['selectedtext']
 		songNumber = request.form['buttonForSongNumber']
-		print "song number is " + str(songNumber) + "songnum"
-
-		lyrik = fillAnnotateTable(songNumber)
-		print lyrik
-		varArray = find_substring("\n",lyrik)
-		# def getLineNum()
-		#     pos =0;
-		#     num = -1;
-		#     i = -1;
-		#     while pos!=-1:
-		#         pos = lyrik.indexOf("<br>", i+1)
-		#         array.push(pos -  1);
-		#         num+=1;
-	    #      	i=pos;
-	
-		print varArray
-
-		print tempAnnotation.split('\n')
-		return tempAnnotation
-	else:
-		tempAnnotation = request.args.get('selectedtext')
-		songNumber = request.args.get('buttonForSongNumber')
-		theAnnotation = request.args.get('annotationItself')
-		# endlineprint "RECIEVED DATA"
-		# print songNumber
+		theAnnotation = request.form['annotationItself']
 		tempAnnotation = tempAnnotation[:-1]
-		# m=tempAnnotation
 		m = tempAnnotation.split('\r\n')
 		l = tempAnnotation.splitlines()
-		# print l
-		# print m[0]
-		# print "first elements"
-		# print m
-		# print "this is temp annote"
-		# print tempAnnotation
-		# print "ACTUAL SONG"
-		print "-----------------------"
-		print type(songNumber)
+
 		s = '\n \n'.join(makeSongLyricsList(int(songNumber)))
 		splitwise = fillAnnotateTable(int(songNumber)).splitlines()
-		# print "im pennywise the dancing clown"
-		# print splitwise
-		# print "------------- HEREREREE--------------"
-		# print tempAnnotation in makeSongLyricsList(1)
-		# print allindices (m[0], makeSongLyricsList)
-		# print 'hello - '.join(str(e) for e in makeSongLyricsList(1))
-		# print ''.join(m)
-		# s=s.strip()
-		# print "markerrrrrrrrrrrrrr"
 
-		# print s 
-		# print "yello 1111111111111111"
-		# print '\r\n'.join(m)
-		# startingCharacter = s.find('\r\n'.join(m))
-		# print "start char"
-		# print startingCharacter
-		# endingCharacter = startingCharacter + len(''.join(m))
-		# print "end char"
-		# print endingCharacter
-
-		# print "yello 2222222222"
 		startingCharacter1 = s.find(tempAnnotation)
 		print "start char"
 		print startingCharacter1
@@ -324,42 +271,24 @@ def newAnnotationHandling():
 		# if startingCharacter1 is -1:
 		startingCharacter = startingCharacter2 + 15
 		endingCharacter = endingCharacter2 
-		# else:
-		# 	startingCharacter = startingCharacter1
-		# 	endingCharacter = endingCharacter1
 
-		# print s.find(m[0])
-		# print s.find(m[-1])
-		# print songNumber + "songnum"
 		lyrik = fillAnnotateTable(songNumber)
-		print "----------- lyric is "
-		print lyrik
-		# print lyrik
-		# varArray=[]
+
 		varArray = find_substring("\n", lyrik)
-		print varArray
-		print "number of elements"
 
 		catch = False
 		for i in range(len(varArray)):
 			if startingCharacter < varArray[i] and catch is False:
-
 				startline = i + 1
 				startingCharacter = startingCharacter + startline
-
-				# print "startline=" + str(startline)
 				catch = True
 
 			if endingCharacter < varArray[i]:
 				endline = i + 1
 				endingCharacter = endingCharacter + endline
-
-				# end
-				# print "endline=" + str(endline)
 				break
 
 		catch = False
-
 		for i in range(len(varArray)):
 			if startingCharacter < varArray[i] and catch is False:
 
@@ -379,10 +308,76 @@ def newAnnotationHandling():
 
 		annotateText = Annotations(theAnnotation, current_user.id, songNumber, startline, endline)
 		addAnnotationToDatabase (annotateText)
-		# return redirect(url_for(song(int(songNumber))))
-		# return render_template
 		return song(int(songNumber))
-		# return "added annotation successfully"
+	else:
+		tempAnnotation = request.args.get('selectedtext')
+		songNumber = request.args.get('buttonForSongNumber')
+		theAnnotation = request.args.get('annotationItself')
+		tempAnnotation = tempAnnotation[:-1]
+		m = tempAnnotation.split('\r\n')
+		l = tempAnnotation.splitlines()
+
+		s = '\n \n'.join(makeSongLyricsList(int(songNumber)))
+		splitwise = fillAnnotateTable(int(songNumber)).splitlines()
+
+		startingCharacter1 = s.find(tempAnnotation)
+		print "start char"
+		print startingCharacter1
+		endingCharacter1 = startingCharacter1 + len(''.join(m))
+		print "end char"
+		print endingCharacter1
+
+		# print "yello 33333333333"
+		part = ''.join(l)
+		full = ''.join(splitwise)
+		startingCharacter2 = full.find(part)
+		print "start char"
+		print startingCharacter2
+		endingCharacter2 = startingCharacter2 + len(''.join(part))
+		print "end char"
+		print endingCharacter2
+
+		# if startingCharacter1 is -1:
+		startingCharacter = startingCharacter2 + 15
+		endingCharacter = endingCharacter2 
+
+		lyrik = fillAnnotateTable(songNumber)
+
+		varArray = find_substring("\n", lyrik)
+
+		catch = False
+		for i in range(len(varArray)):
+			if startingCharacter < varArray[i] and catch is False:
+				startline = i + 1
+				startingCharacter = startingCharacter + startline
+				catch = True
+
+			if endingCharacter < varArray[i]:
+				endline = i + 1
+				endingCharacter = endingCharacter + endline
+				break
+
+		catch = False
+		for i in range(len(varArray)):
+			if startingCharacter < varArray[i] and catch is False:
+
+				startline = i + 1
+				catch = True
+
+			if endingCharacter < varArray[i]:
+				endline = i + 1
+				break
+
+		print tempAnnotation
+		print "startline= " + str(startline)
+		print "endline= " + str(endline)
+
+		artistid = returnArtistIdFromSongId(songNumber)
+
+
+		annotateText = Annotations(theAnnotation, current_user.id, songNumber, startline, endline)
+		addAnnotationToDatabase (annotateText)
+		return song(int(songNumber))
 
 @app.route('/searchQuery', methods=['GET'])
 def searchQuery():
@@ -402,7 +397,7 @@ def newUserHandling():
 		bio = request.form['bio']
 		profilePicture = request.form['profilePicture']
 		if not profilePicture:
-			profilePicture = "https://kaggle2.blob.core.windows.net/avatars/images/1629463-kg.jpg"
+			profilePicture = "http://i.imgur.com/YdhUZdZ.png"
 		if isArtist:
 			u = User (username, userpassword, useremail, 1, bio, profilePicture)
 		else:

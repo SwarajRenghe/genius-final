@@ -12,10 +12,13 @@ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="ano
       <li class="nav-item" style="text-align: center">
           <a class="nav-link js-scroll-trigger" href="/profile" style="padding-right: 6vh; padding-left: 16vh; color: white; font-size: 17px"> Back To Profile </a>
       </li>
-    {% else %}
       <li class="nav-item" style="text-align: center">
           <a class="nav-link js-scroll-trigger" href="/logout" style="padding-right: 6vh;color: white; font-size: 17px"> Logout </a>
       </li>
+    {% else %}
+    <li class="nav-item" style="text-align: center">
+      <a class="nav-link js-scroll-trigger" href="/" style="padding-right: 6vh;color: white; font-size: 17px"> Back To Home </a>
+    </li>
     {% endif %}
 {% endblock %}
 {% block body %}
@@ -43,14 +46,13 @@ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="ano
           // document.getElementById("actualAnnotations").style.opacity = "1";
           text = "srow" + (i+1);
           document.getElementById(text).style.display = "block";
-          for (j = 1; j < lineNumber; j++) {
-            br = br + '<p style="font-size:3vh; opacity:0; margin:0;">well</p>'
-          }
-          document.getElementById('brs').innerHTML = br;
-          // console.log(br);
-          document.getElementById('brs').style.display = "block"
-        }  
+        }    
       }
+      for (j = 1; j < lineNumber; j++) {
+        br = br + '<p style="font-size:3vh; opacity:0; margin:0;">well</p>'
+      }
+      document.getElementById('brs').innerHTML = br;
+      document.getElementById('brs').style.display = "block"
       isVisible = 1;
     }
     else {
@@ -266,7 +268,6 @@ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="ano
           {% for j in song[5] %}
           {% if loop.index in allAnnotationLineNumbers %} 
           <p style="background-color: lightblue; width: auto; margin: 0" class="xoxo" onclick="showAnnotationCorrespondingToThis({{ loop.index }})"> {{ j }} </p>
-
           {% else %} 
           <p style="width: auto; margin: 0" class="xoxo"> {{ j }} </p>
           {% endif %}
@@ -283,16 +284,16 @@ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="ano
             <!-- <div class="lyrics" id="lyric" style="text-align: center"> -->
               <!-- {{ i.lyric.replace('\n','<br />') | safe }} -->
               <!-- {% for j in i.lyric -%}{{ j.replace('\n', '<br />') | safe }}{% endfor %} -->
-
+{% if is_authenticated %}
       <div id="allOfMakeAnnotation" class="container allOfMakeAnnotation">
-        <button class="btn btn-primary" id="showAnnotationButton" onclick="showMakeAnnotationButtonPressed()">
+<!--         <button class="btn btn-primary" id="showAnnotationButton" onclick="showMakeAnnotationButtonPressed()">
           Make Annotations
-        </button> <br><br><br>
+        </button> <br><br><br> -->
         <div id="annotation1" style="opacity: 1">
           <button class="btn btn-primary" id="getSelectionButton" value="Get selection" onmousedown="getSelText()">
             Get Selection
           </button>
-          <form action='http://localhost:5000/newAnnotationPage' name="aform" id="aform" style="display: block;">
+          <form action='http://localhost:5000/newAnnotationPage' name="aform" id="aform" style="display: block;" method="POST">
             <textarea id="buttonForSongNumber" name="buttonForSongNumber" style="visibility: hidden"></textarea>
             <textarea name="selectedtext" id="selectedtext" name="selectedtext" rows="12" cols="40" style="font-size: 2vh;"></textarea>
             <textarea name="annotationItself" id="annotationText" name="annotationText" placeholder="W
@@ -303,7 +304,7 @@ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="ano
           </form>
         </div>
       </div>  
-
+{% endif %}
       <br>
       <!-- </div> -->
       

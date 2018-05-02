@@ -14,7 +14,7 @@ Public Profile
         </li>
     {% endif %}
     <li class="nav-item" style="text-align: center">
-        <a class="nav-link js-scroll-trigger" href="/editProfile" style="padding-right: 6vh;color: white; font-size: 17px"> Home Page </a>
+        <a class="nav-link js-scroll-trigger" href="/" style="padding-right: 6vh;color: white; font-size: 17px"> Home Page </a>
     </li>
     <form style="margin-left: 10vh;" action="/searchQuery" name="searchQuery" method="GET">
         <div class="form-group">
@@ -31,7 +31,7 @@ Public Profile
     <!-- <div class="profile-header"> -->
         <div class="col-sm-2"> </div>
         <div class="col-sm-3">
-            <img src="{{ thisArtistData.profilePicture }}" class="img-circle" alt="artist">
+            <img src="{{ thisArtistData.profilePicture }}" class="img-circle" alt="artist" height="300vh" width="300vh">
         </div>
         <div class="col-sm-3">
             <p style="font-size: 8vh"> @{{ thisArtistData.username }} </p>
@@ -62,7 +62,7 @@ Public Profile
                       <tr>
                         <td> {{ loop.index }} </td>
                         <td> {{ i[0] }} </td>
-                        <td> {{ i[1] }} </td>
+                        <td> <img src="{{ i[1] }}" width="60vh" height="60vh" alt="hello"> </td>
                       </tr>
                         {% endfor %}
                     </tbody>

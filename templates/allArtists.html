@@ -17,19 +17,25 @@
         </li>
     {% else %}
         <li class="nav-item" style="text-align: center">
-            <a class="nav-link js-scroll-trigger" href="/" style="padding-left: 45vh;padding-right:6vh;color: white;font-size: 17px"> Go to HomePage </a>
+            <a class="nav-link js-scroll-trigger" href="/" style="padding-right:6vh;color: white;font-size: 17px"> Go to HomePage </a>
         </li>
     {% endif %}
+    <form style="margin-left: 10vh;" action="/searchQuery" name="searchQuery" method="GET">
+      <div class="form-group">
+        <input type="text" name="searchQuery" placeholder="search.."  style="width: 100%; font-size: 2vh; padding: 1vh; margin: 0; margin-top: 1vh; border: none;">
+        <!-- <small id="emailHelp" class="form-text text-muted" style="color: white;"> Search for a song or an annotation </small> -->
+      </div>
+    </form>
 {% endblock %}
 
 {% block body %}
-<br><br>
+<br><br><br>
 
 
 
 <div class="titleBar">
   <!-- <div class="Genius"> <p> Genius </p> </div> -->
-  <p style="font-size: 12vh"> All Artists </p>
+  <p style="font-size: 12vh; margin: auto; text-align: center; padding-top: 1vh;" > All Artists </p>
   <!-- <p> all songs </p> -->
 </div>
 
@@ -45,7 +51,7 @@
         <img src="{{ i[2] }}" alt="Image Not Available" height="150vh;" width="150vh;">
       </div>
       <div class="col-sm-8" style="text-align: left; width: 75%;">
-        <a href="publicArtistProfile/{{ i[0] }}" class="songNumber" style=" font-size: 6vh;"> {{ i[0] }}. {{ i[1] }}</a>
+        <a href="publicArtistProfile/{{ i[0] }}" class="songNumber" style=" font-size: 6vh;"> {{ loop.index }}. {{ i[1] }}</a>
         <br>
         <p class="songNumber" style="font-size: 4vh;"> {{ i.artist }} </p>
       </div>

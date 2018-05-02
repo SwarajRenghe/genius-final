@@ -8,8 +8,18 @@
   Add User
 {% endblock %}
 
+{% block titleBarElement %} 
+  <li class="nav-item" style="text-align: center">
+    <a class="nav-link js-scroll-trigger" href="/" style="padding-right: 6vh; padding-left: 16vh; color: white; font-size: 17px"> Back To Home Page </a>
+  </li>
+{% endblock %}
+
+<style>
+
+</style>
+
 {% block body %}
-<div class="bg1"> </div>
+<div class="bg3"> . </div>
 
 <div class="Title"> Register </div>
 
@@ -24,12 +34,12 @@
           <br>
         <input type="password" name="pwd2" placeholder="Re-enter Password" required>
           <br>
-
-          <input type = "checkbox" name = "checkArtist" value = "checkArtist" style="font-size: 2vh "> I am an artist
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <inline style="margin: 0; margin-left: 3vh; color:black; font-size: 3vh"> I am an Artist </inline>
+          <input type = "checkbox" name = "checkArtist" value = "checkArtist" style="font-size: 2vh; color: black; margin: auto; text-align: center;"> 
           <br>
 
-        <textarea name="bio" placeholder="A brief description of yourself" rows = "3" columns = "160">
-        </textarea>
+        <textarea name="bio" autofocus placeholder="A brief description of yourself" style="text-align: center; vertical-align: middle" rows = "3" cols="40"></textarea>  
         <input type="text" name="profilePicture" placeholder="Link to Profile Picture">
           <br>
 

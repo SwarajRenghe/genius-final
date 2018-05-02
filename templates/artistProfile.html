@@ -17,7 +17,7 @@ Profile
         </li>
     {% endif %}
     <li class="nav-item" style="text-align: center">
-        <a class="nav-link js-scroll-trigger" href="/editProfile" style="padding-right: 6vh;color: white; font-size: 17px"> Edit Profile </a>
+        <a class="nav-link js-scroll-trigger" href="/editProfile.html" style="padding-right: 6vh;color: white; font-size: 17px"> Edit Profile </a>
     </li>
     <form style="margin-left: 10vh;" action="/searchQuery" name="searchQuery" method="GET">
         <div class="form-group">
@@ -37,11 +37,11 @@ Profile
             <img src="{{ userData.profilePicture }}" class="img-circle" alt="artist">
         </div>
         <div class="col-sm-3">
-                <p style="font-size: 8vh"> @{{ userData.username }} </p>
-                <p style="font-size: 4vh"> ARTIST </p>
-                <a href="/addSong" style="font-size: 2vh;"> Add Song </a>
-                <a href="/addPost" style="font-size: 2vh;"> Add Post </a>
-
+          <p style="font-size: 8vh"> @{{ userData.username }} </p>
+          <p style="font-size: 4vh"> ARTIST </p>
+          <a href="/addSong" style="font-size: 2vh; color: hotpink"> Add Song </a> <br>
+          <a href="/addPost" style="font-size: 2vh;color: hotpink"> Add Post </a> <br>
+          <a href="/publicArtistProfile/{{ userData.id }}" style="font-size: 2vh;color: hotpink"> See your Public Profile </a> 
         </div>
         <div class="col-sm-3"> </div>
         <div class="col-sm-1"> <a href="/logout"> Log Out </a></div>
@@ -104,7 +104,7 @@ Profile
                         <tr>
                           <td> {{ loop.index }} </a> </td>
                           <td> {{ i[0] }} </td>
-                          <td> <img src="{{ i[1] }}" width="3vh" height="3vh"> </td>
+                          <td> <img src="{{ i[1] }}" width="3vh" height="3vh" alt="hello"> </td>
                         </tr>
                       {% endfor %}
                     </tbody>
