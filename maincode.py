@@ -78,10 +78,12 @@ def logout():
 @login_required
 def profilePage():
 	userData = returnUserData(current_user.username)
+	print "user dataaaaaaaaaaa"
+	print userData
 	annotationDataForThisUser = returnAnnotationDataForThisUser(current_user.id)
 	print "annotationDataForThisUser = "
 	print annotationDataForThisUser
-	if str(userData.isArtist) == "checkArtist":
+	if str(userData.isArtist) == "1":
 		songList = returnArtistSongData(userData.id)
 		postList = getPostsForThisArtist(current_user.id)
 		return render_template ('artistProfile.html', userData=userData, songList=songList, annotationDataForThisUser=annotationDataForThisUser, postsForThisArtist=postList)

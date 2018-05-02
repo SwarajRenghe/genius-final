@@ -45,8 +45,8 @@ def getPostsForThisArtist (artistID):
         posts.append(x)
     return posts
 
-print "hereeeeeeeeee"
-print getPostsForThisArtist(1)
+# print "hereeeeeeeeee"
+# print getPostsForThisArtist(1)
 
 def getAllPosts ():
     session = Session()
@@ -357,7 +357,7 @@ def returnSong (songID):
     song.append(lines)
     return song
 
-print returnSong (1)
+# print returnSong (1)
 
 def fillAnnotateTable(songnum):
     session = Session()
