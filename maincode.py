@@ -265,23 +265,65 @@ def newAnnotationHandling():
 		# endlineprint "RECIEVED DATA"
 		# print songNumber
 		tempAnnotation = tempAnnotation[:-1]
-		m = tempAnnotation.split('\n')
+		# m=tempAnnotation
+		m = tempAnnotation.split('\r\n')
+		l = tempAnnotation.splitlines()
+		# print l
+		# print m[0]
+		# print "first elements"
+		# print m
+		# print "this is temp annote"
 		# print tempAnnotation
 		# print "ACTUAL SONG"
 		print "-----------------------"
 		print type(songNumber)
-		s = ''.join(makeSongLyricsList(int(songNumber)))
+		s = '\n \n'.join(makeSongLyricsList(int(songNumber)))
+		splitwise = fillAnnotateTable(int(songNumber)).splitlines()
+		# print "im pennywise the dancing clown"
+		# print splitwise
 		# print "------------- HEREREREE--------------"
 		# print tempAnnotation in makeSongLyricsList(1)
 		# print allindices (m[0], makeSongLyricsList)
 		# print 'hello - '.join(str(e) for e in makeSongLyricsList(1))
 		# print ''.join(m)
-		startingCharacter = s.find(''.join(m))
+		# s=s.strip()
+		# print "markerrrrrrrrrrrrrr"
+
+		# print s 
+		# print "yello 1111111111111111"
+		# print '\r\n'.join(m)
+		# startingCharacter = s.find('\r\n'.join(m))
+		# print "start char"
+		# print startingCharacter
+		# endingCharacter = startingCharacter + len(''.join(m))
+		# print "end char"
+		# print endingCharacter
+
+		# print "yello 2222222222"
+		startingCharacter1 = s.find(tempAnnotation)
 		print "start char"
-		print startingCharacter
-		endingCharacter = startingCharacter + len(''.join(m))
+		print startingCharacter1
+		endingCharacter1 = startingCharacter1 + len(''.join(m))
 		print "end char"
-		print endingCharacter
+		print endingCharacter1
+
+		# print "yello 33333333333"
+		part = ''.join(l)
+		full = ''.join(splitwise)
+		startingCharacter2 = full.find(part)
+		print "start char"
+		print startingCharacter2
+		endingCharacter2 = startingCharacter2 + len(''.join(part))
+		print "end char"
+		print endingCharacter2
+
+		if startingCharacter1 is -1:
+			startingCharacter = startingCharacter2 + 15
+			endingCharacter = endingCharacter2 +15
+		else:
+			startingCharacter = startingCharacter1
+			endingCharacter = endingCharacter1
+
 		# print s.find(m[0])
 		# print s.find(m[-1])
 		# print songNumber + "songnum"
@@ -297,16 +339,34 @@ def newAnnotationHandling():
 		catch = False
 		for i in range(len(varArray)):
 			if startingCharacter < varArray[i] and catch is False:
+
 				startline = i + 1
+				startingCharacter = startingCharacter + startline
+
 				# print "startline=" + str(startline)
 				catch = True
 
 			if endingCharacter < varArray[i]:
 				endline = i + 1
+				endingCharacter = endingCharacter + endline
+
+				# end
 				# print "endline=" + str(endline)
 				break
 
-		# print tempAnnotation
+		catch = False
+
+		for i in range(len(varArray)):
+			if startingCharacter < varArray[i] and catch is False:
+
+				startline = i + 1
+				catch = True
+
+			if endingCharacter < varArray[i]:
+				endline = i + 1
+				break
+
+		print tempAnnotation
 		print "startline= " + str(startline)
 		print "endline= " + str(endline)
 

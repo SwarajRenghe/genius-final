@@ -161,7 +161,12 @@ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="ano
             console.log(newstr);
             var morevars = x.indexOf(gotit);
             morevars = morevars.toString();
+            console.log("morevars coming upppp");
+            console.log(morevars);
+
             morevars = morevars.replace(/^(\s+<br( \/)?>)*|(<br( \/)?>\s)*$/gm, '');
+            console.log(morevars);
+
             for(i = 0; i < num; i++)
             {
               if(morevars <= array[i])
@@ -284,7 +289,9 @@ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="ano
           Make Annotations
         </button> <br><br><br>
         <div id="annotation1" style="opacity: 1">
-          <input type="button" value="Get selection" onmousedown="getSelText()">
+          <button class="btn btn-primary" id="getSelectionButton" value="Get selection" onmousedown="getSelText()">
+            Get Selection
+          </button>
           <form action='http://localhost:5000/newAnnotationPage' name="aform" id="aform" style="display: block;">
             <textarea id="buttonForSongNumber" name="buttonForSongNumber" style="visibility: hidden"></textarea>
             <textarea name="selectedtext" id="selectedtext" name="selectedtext" rows="12" cols="40" style="font-size: 2vh;"></textarea>
