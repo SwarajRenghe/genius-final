@@ -7,6 +7,17 @@ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="ano
 {% endblock %}
 {{ songNumber }}
 
+{% block titleBarElement %} 
+    {% if is_authenticated %}
+      <li class="nav-item" style="text-align: center">
+          <a class="nav-link js-scroll-trigger" href="/profile" style="padding-right: 6vh; padding-left: 16vh; color: white; font-size: 17px"> Back To Profile </a>
+      </li>
+    {% else %}
+      <li class="nav-item" style="text-align: center">
+          <a class="nav-link js-scroll-trigger" href="/logout" style="padding-right: 6vh;color: white; font-size: 17px"> Logout </a>
+      </li>
+    {% endif %}
+{% endblock %}
 {% block body %}
 
 <script type="application/javascript">
@@ -287,7 +298,7 @@ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="ano
       <br>
       <!-- </div> -->
       
-      <div class="container row">
+      <div class="classontainer row">
       <div class="add-comments" id="add-comments">
         <h4 style="font-size:26px;font-weight:200;border-bottom:1px solid #979797; padding-bottom:5px; margin-top:50px; margin-left: 10px;">
          Add Comment

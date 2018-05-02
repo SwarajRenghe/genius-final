@@ -1,7 +1,6 @@
 {% extends 'basicHTML.html' %}
 
 {% block head %}
-  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='allSongs.css') }}">
 {% endblock %}
 
 {% block title %}
@@ -30,29 +29,28 @@
 
 <div class="titleBar">
   <!-- <div class="Genius"> <p> Genius </p> </div> -->
-  <p style="font-size: 12vh"> All Songs </p>
+  <p style="font-size: 12vh"> All Artists </p>
   <!-- <p> all songs </p> -->
 </div>
 
 <br><br>
 
 
-{% for i in songs %}
+{% for i in allArtistIDs %}
 
   <ul class="list-group" style="text-align: center; margin: auto; width: 40%; ">
     <li class="list-group-item">
     <div class="row">
       <div class="col-sm-4">
-        <img src="{{ i.imglink }}" alt="Image Not Available" height="150vh;" width="150vh;">
+        <img src="{{ i[2] }}" alt="Image Not Available" height="150vh;" width="150vh;">
       </div>
       <div class="col-sm-8" style="text-align: left; width: 75%;">
-        <a href="songs/{{ i.songnumber }}" class="songNumber" style=" font-size: 6vh;"> {{ i.songnumber }}. {{ i.songname }}</a>
+        <a href="publicArtistProfile/{{ i[0] }}" class="songNumber" style=" font-size: 6vh;"> {{ i[0] }}. {{ i[1] }}</a>
         <br>
         <p class="songNumber" style="font-size: 4vh;"> {{ i.artist }} </p>
       </div>
     </div>
     </li>
-   
   </ul>
 {% endfor %}
 <br>

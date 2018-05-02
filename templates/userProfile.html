@@ -14,6 +14,9 @@ Profile
     <li class="nav-item" style="text-align: center">
         <a class="nav-link js-scroll-trigger" href="/logout" style="padding-right: 6vh color: white; font-size: 17px"> Logout </a>
     </li>
+    <li class="nav-item" style="text-align: center">
+      <a class="nav-link js-scroll-trigger" href="/editProfile.html" style="padding-right: 6vh;color: white; font-size: 17px"> Edit Profile </a>
+    </li>
     <form style="margin-left: 10vh;" action="/searchQuery" name="searchQuery" method="GET">
         <div class="form-group">
             <input type="text" name="searchQuery" placeholder="search.."  style="width: 100%; font-size: 2vh; padding: 1vh; margin: 0; margin-top: 1vh; border: none;">
@@ -25,7 +28,7 @@ Profile
 
 <br><br>
 
-<div class="row" id="profile-header"> 
+<div class="row" id="profile-header" style="width: 101%"> 
     <!-- <div class="profile-header"> -->
         <div class="col-sm-2"> </div>
         <div class="col-sm-3">
@@ -41,7 +44,7 @@ Profile
 
         </div>
         <div class="col-sm-3"> </div>
-        <div class="col-sm-1"> <a href="/logout"> Log Out </a></div>
+        <!-- <div class="col-sm-1"> <a href="/logout"> Log Out </a></div> -->
 </div> 
 <br><br><br><br>
 <div class="container-fluid">
@@ -65,9 +68,9 @@ Profile
                     <tbody>
                       {% for i in annotationDataForThisUser %}
                         <tr>
-                          <td> <a href="/songs/{{ i[0] }}" style="text-decoration: none; color: black"> {{ loop.index }} </a> </td>
-                          <td> <a href="/songs/{{ i[0] }}" style="text-decoration: none; color: black"> {{ i[1] }} </a> </td>
-                          <td> <a href="/songs/{{ i[0] }}" style="text-decoration: none; color: black"> {{ i[2] }} </a> </td>
+                          <td> <a href="/songs/{{ i[0] }}" style=" color: black"> {{ loop.index }} </a> </td>
+                          <td> <a href="/songs/{{ i[0] }}" style=" color: black"> {{ i[1] }} </a> </td>
+                          <td> <a href="/songs/{{ i[0] }}" style="color: black"> {{ i[2] }} </a> </td>
                         </tr>
                       {% endfor %}
                     </tbody>

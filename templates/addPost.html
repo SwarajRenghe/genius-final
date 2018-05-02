@@ -1,0 +1,49 @@
+{% extends 'basicHTML.html' %}
+
+{% block title %}
+	Search
+{% endblock %}
+
+{% block titleBarElement %}
+    <li class="nav-item" style="text-align: center">
+      	<a class="nav-link js-scroll-trigger" href="/profile" style="padding-left: 45vh;padding-right: 6vh; color: white; font-size: 17px"> Cancel </a>
+    </li>
+{% endblock %}
+
+{% block body %}
+<br><br>
+<div class="titleBar">
+	<p style="font-size: 9vh;"> Add Post </p>
+</div>
+<br>
+<form action="http://localhost:5000/editProfile" style="margin: auto; text-align: center;" method="POST" onsubmit="return checkForm(this);">
+    <fieldset>
+        <textarea required name="post" autofocus placeholder="Your Post - Will Be Visible To All Users" style="text-align: center; vertical-align: middle" rows = "3" cols="40"></textarea>
+        <br>
+        <input type="text" name="optionalPicture" autofocus placeholder="Link To Optional Picture" style="text-align: center;">
+        <br> <br>
+
+        <input type="submit" class="btn btn-primary" value="Update">
+    </fieldset>
+  </form>
+
+<style>
+.titleBar {
+  width: 100%;
+  padding: 4vh;
+  /*margin-top: 2vh;*/
+  /* top: auto; */
+  background-color: powderblue;
+  text-align: center;
+  font-family: 'Work Sans', sans-serif;
+}
+input[type=text], input[type=password] {
+    width: 30%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    /*border: ;*/
+}
+
+</style>
+
+{% endblock %}

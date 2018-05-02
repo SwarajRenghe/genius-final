@@ -15,7 +15,49 @@ Base = declarative_base()
 Session = sessionmaker(bind=engine)
 session = Session()
 
+class Posts (UserMixin, Base):
+    __tablename__ = 'posts'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    post = Column(String, unique = True, nullable=False)
+    picture = Column(String)
+    likes = Column(Integer)
+    user_id = Column(Integer, ForeignKey('users.id'))
 
+    def __init__(self, post, pic):
+        self.posts = post
+        self.picture = pic
+
+def addPostToDatabase(post, picture):
+    session = Session()
+    temp = Posts (post, picture)
+    session.add(temp)
+    session.commit()
+    session.close()
+
+def getPostsForThisArtist (artistID):
+    session = Session()
+    posts = []
+    temp = session.query(Posts).filter_by(user_id=artistID).all()
+    for i in temp:
+        x = []
+        x.append(i.post)
+        x.append(i.picture)
+        posts.append(x)
+    return posts
+
+print "hereeeeeeeeee"
+print getPostsForThisArtist(1)
+
+def getAllPosts ():
+    session = Session()
+    posts = []
+    temp = session.query(Posts).all()
+    for i in temp:
+        x = []
+        x.append(i.post)
+        x.append(i.picture)
+        posts.append(x)
+    return posts
 
 class Comments (Base):
     __tablename__ = 'comments'
@@ -136,6 +178,9 @@ class User (UserMixin, Base):
         cascade="all, delete-orphan",
         passive_deletes=True
     )
+    post = relationship('Posts',
+        backref=backref('post_users', lazy='joined')
+    )
 
     def __init__(self, username,password,email,isArtist, bio, profilePicture):
 
@@ -145,6 +190,24 @@ class User (UserMixin, Base):
         self.bio = bio
         self.isArtist = isArtist
         self.profilePicture = profilePicture
+
+
+
+def allPostsEverywhere():
+    session = Session()
+    # query = session(Posts).all()
+    allArtistIDs = returnAllArtistIDs()
+    allPosts = []
+    for i in allArtistIDs:
+        temp = []
+        query = session.query(Posts).filter_by(user_id=i[0]).all()
+        for j in query:
+            temp.append(i[1])
+            temp.append(j.post)
+            temp.append(j.picture)
+        allPosts.append(temp)
+    return allPosts
+
 
 def returnUserData (username):
 	session = Session()
@@ -158,6 +221,19 @@ def returnUserData (username):
 	userData.profilePicture = query.profilePicture
 	session.close()
 	return userData
+
+def returnUserDataByUserID (userID):
+    session = Session()
+    query = session.query(User).filter_by(id=userID).first()
+    userData = userClass()
+    userData.id = query.id
+    userData.username = query.username
+    userData.email = query.email
+    userData.bio = query.bio
+    userData.isArtist = query.isArtist
+    userData.profilePicture = query.profilePicture
+    session.close()
+    return userData
 
 def addUserToDatabase (user):
     session = Session()
@@ -190,7 +266,6 @@ def isUserVerified(entered_data) :
     # query = session.query(User).filter(User.username.in_([login_username]))
     except AttributeError:
         print "user not in database"
-
 
 class Song (Base):
     __tablename__ = 'songs'
@@ -335,6 +410,28 @@ def searchForThisText(searchQuery):
             allAnnotationDescriptions.append([i.ann_desc, i.song_id])
     return [allUserNames, allAnnotationDescriptions]
 
+def updatePassword(id, password, bio, dp):
+    session.query(User).filter_by(id=id).update({"password": password})
+    if bio:
+        session.query(User).filter_by(id=id).update({"bio": bio})
+    if dp:
+        session.query(User).filter_by(id=id).update({"profilePicture": dp})
+    session.commit()
+
+def returnAllArtistIDs():
+    session = Session()
+    query = session.query(User).filter_by(isArtist="checkArtist").all()
+    artistIDs = []
+    for i in query:
+        x = []
+        x.append(i.id)
+        x.append(i.username)
+        x.append(i.profilePicture)
+        artistIDs.append(x)
+    return artistIDs
+
+# print "here"
+# print returnAllArtistIDs()
 
 class userClass:
 	id = None
